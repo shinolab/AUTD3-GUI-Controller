@@ -1,0 +1,123 @@
+﻿<!--
+File: Link.xaml
+Project: Views
+Created Date: 29/03/2021
+Author: Shun Suzuki
+=====
+Last Modified: 07/04/2021
+Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
+=====
+Copyright (c) 2021 Hapis Lab. All rights reserved.
+
+-->
+
+<Page x:Class="AUTD3Controller.Views.Link"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:viewModels="clr-namespace:AUTD3Controller.ViewModels"
+      xmlns:converter="clr-namespace:AUTD3Controller.Converter"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:domain="clr-namespace:AUTD3Controller.Domain"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Link">
+
+    <Page.Resources>
+        <converter:BoolToEnumConverter x:Key="Enum"/>
+    </Page.Resources>
+
+    <Page.DataContext>
+        <viewModels:LinkViewModel/>
+    </Page.DataContext>
+
+    <Grid Margin="12">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Link" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
+            <Grid Grid.Row="1" Margin="0 12 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" Margin="0 0 0 12">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton
+                            Style="{DynamicResource MaterialDesignUserForegroundRadioButton}"                            
+                            IsChecked="{Binding DataContext.LinkSelected.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Enum}, ConverterParameter=SOEM, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"/>
+                                <TextBlock
+                          Margin="8,0,0,0"
+                          VerticalAlignment="Center"
+                          Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                          Text="SOEMLink" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid Height="32">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0"
+                    FontSize="16"
+                    IsEditable="True"
+                    ItemsSource="{Binding Interfaces}"
+                    materialDesign:HintAssist.Hint="Interface name"
+                    materialDesign:ValidationAssist.OnlyShowOnFocus="True"
+                    materialDesign:ValidationAssist.FontSize="16"
+                    Style="{StaticResource MaterialDesignComboBox}"
+                    Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                    IsEnabled="{Binding DataContext.LinkSelected.Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Enum}, ConverterParameter=SOEM, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}">
+                            <ComboBox.Text>
+                                <Binding Path="InterfaceName.Value" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ComboBox.Text>
+                        </ComboBox>
+                        <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="32" Height="32" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}"
+                        Command="{Binding UpdateInterfaces}">
+                            <materialDesign:PackIcon Kind="Reload"/>
+                        </Button>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" Margin="0 0 0 12">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <RadioButton 
+                            Style="{DynamicResource MaterialDesignUserForegroundRadioButton}"                            
+                            IsChecked="{Binding DataContext.LinkSelected.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Enum}, ConverterParameter=LocalTwinCAT, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"/>
+                                <TextBlock
+                          Margin="8,0,0,0"
+                          VerticalAlignment="Center"
+                          Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                          Text="LocalTwinCATLink" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                </GroupBox>
+            </Grid>
+            <Grid Grid.Row="2" HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}" Grid.Column="0" Width="80" Content="Open" Margin="12 0 0 0"
+                    Command="{Binding Open}"/>
+                <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Grid.Column="1" Margin="12 0 0 0"
+                        Command="{Binding Close}"
+                        Width="80"
+                        Content="Close"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
