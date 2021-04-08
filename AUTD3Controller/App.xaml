@@ -4,7 +4,7 @@ Project: AUTD3Controller
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 07/04/2021
+Last Modified: 08/04/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -18,7 +18,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
     StartupUri="MainWindow.xaml"
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    >
+    xmlns:mde="https://spiegelp.github.io/MaterialDesignExtensions/winfx/xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -26,7 +26,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/materialdesigntheme.dark.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/materialdesigncolor.deeppurple.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/materialdesigncolor.deeppurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/materialdesigncolor.lime.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DialogHost.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.ProgressBar.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
@@ -46,6 +46,16 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
             <sys:Double x:Key="MenuExpandWidth">132</sys:Double>
             <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
                 <Setter Property="CaretBrush" Value="{DynamicResource PrimaryHueLightBrush}"/>
+            </Style>
+            <Style TargetType="mde:SaveFileDialog" BasedOn="{StaticResource {x:Type mde:SaveFileDialog}}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{DynamicResource Primary300}" />
+                </Style.Resources>
+            </Style>
+            <Style TargetType="mde:OpenFileDialog" BasedOn="{StaticResource {x:Type mde:OpenFileDialog}}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="{DynamicResource Primary300}" />
+                </Style.Resources>
             </Style>
         </ResourceDictionary>
     </Application.Resources>
