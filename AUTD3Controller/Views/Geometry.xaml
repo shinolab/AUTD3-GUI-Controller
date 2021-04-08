@@ -47,7 +47,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBlock Text="Geometory" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
+        <TextBlock Text="Geometry" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
         <StackPanel Grid.Row="1" Margin="0 12 0 0" Orientation="Horizontal">
             <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" BorderBrush="{x:Null}" Command="{Binding AddItem}">
                 <materialDesign:PackIcon Kind="Add" Width="{StaticResource ActionButtonSize}" Height="{StaticResource ActionButtonSize}"/>

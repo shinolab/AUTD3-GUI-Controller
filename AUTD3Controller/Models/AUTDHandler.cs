@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 08/04/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -50,7 +50,6 @@ namespace AUTD3Controller.Models
         public string? Open()
         {
             try {
-                IsOpen.Value = false;
                 AddDevices();
 
                 var link = AUTDSettings.Instance.LinkSelected switch {
@@ -63,9 +62,7 @@ namespace AUTD3Controller.Models
                     _ => throw new NotImplementedException(),
                 };
 
-                if (!_autd.OpenWith(link)) {
-                    return _autd.LastError;
-                }
+                if (!_autd.OpenWith(link)) return _autd.LastError;
 
                 IsOpen.Value = true;
                 _autd.Clear();
