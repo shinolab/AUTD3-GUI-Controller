@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 08/04/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -18,9 +18,11 @@ using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using AUTD3Controller.Domain;
 using AUTD3Controller.Models;
+using AUTD3Controller.Views;
 using MaterialDesignExtensions.Controls;
 using MaterialDesignThemes.Wpf;
 using Reactive.Bindings;
@@ -57,7 +59,7 @@ namespace AUTD3Controller
         public event PropertyChangedEventHandler PropertyChanged = null!;
 #pragma warning restore 414
 
-        public Uri Uri { get; set; } = new Uri("/Views/Home.xaml", UriKind.Relative);
+        public Page Page { get; set; } = new Home();
     }
 
     public class MainWindowViewModel : INotifyPropertyChanged
@@ -66,7 +68,7 @@ namespace AUTD3Controller
         public event PropertyChangedEventHandler PropertyChanged = null!;
 #pragma warning restore 414
 
-        public ReactiveProperty<Uri> Uri { get; }
+        public ReactiveProperty<Page> Page { get; }
 
         public ReactiveCommand<string> TransitPage { get; }
         public AsyncReactiveCommand ButtonPower { get; }
@@ -80,19 +82,19 @@ namespace AUTD3Controller
 
         private MainWindowModel Model { get; }
 
-        private Dictionary<string, Uri> _pageCache;
+        readonly private Dictionary<string, Page> _pageCache;
 
         public MainWindowViewModel()
         {
-            _pageCache = new Dictionary<string, Uri>();
+            _pageCache = new Dictionary<string, Page>();
 
             Model = new MainWindowModel();
-            Uri = Model.ToReactivePropertyAsSynchronized(m => m.Uri);
+            Page = Model.ToReactivePropertyAsSynchronized(m => m.Page);
 
             TransitPage = new ReactiveCommand<string>();
             TransitPage.Subscribe(page => {
-                if (!_pageCache.ContainsKey(page)) _pageCache.Add(page, new Uri(page, UriKind.Relative));
-                Uri.Value = _pageCache[page];
+                if (!_pageCache.ContainsKey(page)) _pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
+                Page.Value = _pageCache[page]!;
             });
 
             ButtonPower = new AsyncReactiveCommand();

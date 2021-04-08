@@ -4,7 +4,7 @@ Project: AUTD3Controller
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 07/04/2021
+Last Modified: 08/04/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -83,7 +83,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             <materialDesign:PackIcon Kind="Home" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
                             <TextBlock Text="Home" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="/Views/Home.xaml"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Home"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>
@@ -93,7 +93,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             <materialDesign:PackIcon Kind="ViewGridOutline" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
                             <TextBlock Text="Geometry" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="/Views/Geometry.xaml"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Geometry"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>
@@ -103,7 +103,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             <materialDesign:PackIcon Kind="TransitConnectionVariant" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
                             <TextBlock Text="Link" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="/Views/Link.xaml"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Link"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>
@@ -113,7 +113,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             <materialDesign:PackIcon Kind="ContactlessPayment" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
                             <TextBlock Text="Gain" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="/Views/Gain.xaml"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Gain"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>
@@ -123,7 +123,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             <materialDesign:PackIcon Kind="SineWave" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
                             <TextBlock Text="Modulation" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="/Views/Modulation.xaml"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>
@@ -133,7 +133,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             <materialDesign:PackIcon Kind="Settings" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
                             <TextBlock Text="Settings" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="/Views/Settings.xaml"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Settings"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>
@@ -169,7 +169,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                         </Button>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-                        <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Height="{StaticResource MenuIconContainerSize}" Width="{StaticResource MenuIconContainerSize}" BorderBrush="{x:Null}" Background="{x:Null}" Command="{Binding TransitPage}" CommandParameter="/Views/Settings.xaml">
+                        <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Height="{StaticResource MenuIconContainerSize}" Width="{StaticResource MenuIconContainerSize}" BorderBrush="{x:Null}" Background="{x:Null}" Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Settings">
                             <materialDesign:PackIcon Kind="Settings" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" Padding="0"/>
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Height="{StaticResource MenuIconContainerSize}" Width="{StaticResource MenuIconContainerSize}" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}" Command="{Binding ButtonPower}">
@@ -177,7 +177,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                         </Button>
                     </StackPanel>
                 </Grid>
-                <Frame Grid.Row="1" Source="{Binding Uri.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"/>
+                <Frame Grid.Row="1" Content="{Binding Page.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"/>
             </Grid>
         </Grid>
     </Grid>
