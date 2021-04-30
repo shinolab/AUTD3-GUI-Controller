@@ -224,6 +224,119 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     </WrapPanel>
                 </ScrollViewer>
             </TabItem>
+            <TabItem 
+                IsSelected="{Binding GainSelect.Value, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumConverter}, ConverterParameter=PlaneWave}">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock FontSize="{StaticResource HeaderFontSize}">PlaneWave</TextBlock>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <WrapPanel>
+                        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" 
+                              Margin="12 12 0 0">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                    FontSize="{StaticResource HeaderFontSize}"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Direction" />
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="x: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="y: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="z: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding PlaneWave.Value.DirX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding PlaneWave.Value.DirY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding PlaneWave.Value.DirZ, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" 
+                              Margin="12 12 0 0">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                    FontSize="{StaticResource HeaderFontSize}"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Others" />
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="duty: " FontSize="20" TextAlignment="Right" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding PlaneWave.Value.Duty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem 
+                IsSelected="{Binding GainSelect.Value, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumConverter}, ConverterParameter=TransducerTest}">
+                <TabItem.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock FontSize="{StaticResource HeaderFontSize}">TransducerTest</TextBlock>
+                    </DataTemplate>
+                </TabItem.HeaderTemplate>
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <WrapPanel>
+                        <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" 
+                              Margin="12 12 0 0">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                    FontSize="{StaticResource HeaderFontSize}"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                    Text="Others" />
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="index: " FontSize="20" TextAlignment="Right" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="duty: " FontSize="20" TextAlignment="Right" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="phase: " FontSize="20" TextAlignment="Right" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding TransducerTest.Value.Index, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding TransducerTest.Value.Duty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding TransducerTest.Value.Phase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            </Grid>
+                        </GroupBox>
+                    </WrapPanel>
+                </ScrollViewer>
+            </TabItem>
         </TabControl>
         <StackPanel Margin="0 0 0 0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" BorderBrush="{x:Null}" Command="{Binding AppendGainCommand}">

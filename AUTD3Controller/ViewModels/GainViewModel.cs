@@ -32,6 +32,8 @@ namespace AUTD3Controller.ViewModels
 
         public ReactiveProperty<FocalPoint> Focus { get; }
         public ReactiveProperty<BesselBeam> Bessel { get; }
+        public ReactiveProperty<PlaneWave> PlaneWave { get; }
+        public ReactiveProperty<TransducerTest> TransducerTest { get; }
 
         public GainViewModel()
         {
@@ -44,6 +46,8 @@ namespace AUTD3Controller.ViewModels
 
             Focus = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Focus);
             Bessel = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Bessel);
+            PlaneWave = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.PlaneWave);
+            TransducerTest = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.TransducerTest);
         }
     }
 }

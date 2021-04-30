@@ -92,6 +92,8 @@ namespace AUTD3Controller.Models
             {
                 GainSelect.Focus => instance.Focus.ToGain(),
                 GainSelect.Bessel => instance.Bessel.ToGain(),
+                GainSelect.PlaneWave => instance.PlaneWave.ToGain(),
+                GainSelect.TransducerTest => instance.TransducerTest.ToGain(),
                 _ => throw new ArgumentOutOfRangeException()
             };
             _autd.AppendGainSync(gain);
