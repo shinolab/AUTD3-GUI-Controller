@@ -2,9 +2,9 @@
 
 namespace AUTD3Controller.Views
 {
-    public partial class Gain : Page
+    public partial class GainSelect : Page
     {
-        public Gain()
+        public GainSelect()
         {
             InitializeComponent();
         }

@@ -1,5 +1,5 @@
 ﻿/*
- * File: GainViewModel.cs
+ * File: GainSelectViewModel.cs
  * Project: ViewModels
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
@@ -12,16 +12,19 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reactive.Linq;
+using System.Windows.Controls;
 using AUTD3Controller.Models;
 using AUTD3Controller.Models.Gain;
+using AUTD3Controller.Views.Gain;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
 namespace AUTD3Controller.ViewModels
 {
-    internal class GainViewModel : INotifyPropertyChanged
+    internal class GainSelectViewModel : INotifyPropertyChanged
     {
 #pragma warning disable 414
         public event PropertyChangedEventHandler PropertyChanged = null!;
@@ -30,12 +33,18 @@ namespace AUTD3Controller.ViewModels
         public ReactiveProperty<GainSelect> GainSelect { get; }
         public ReactiveCommand AppendGainCommand { get; }
 
-        public ReactiveProperty<FocalPoint> Focus { get; }
+        public ReactiveProperty<Page> Page { get; }
+        private readonly Dictionary<string, Page> _pageCache;
+        public ReactiveCommand<string> TransitPage { get; }
+
         public ReactiveProperty<BesselBeam> Bessel { get; }
+        public ReactiveProperty<Holo> Holo { get; }
         public ReactiveProperty<PlaneWave> PlaneWave { get; }
         public ReactiveProperty<TransducerTest> TransducerTest { get; }
 
-        public GainViewModel()
+        public OptMethod[] Palettes { get; } = (OptMethod[])Enum.GetValues(typeof(OptMethod));
+
+        public GainSelectViewModel()
         {
             GainSelect = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.GainSelect);
             AppendGainCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
@@ -44,10 +53,20 @@ namespace AUTD3Controller.ViewModels
                 AUTDHandler.Instance.AppendGain();
             });
 
-            Focus = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Focus);
             Bessel = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Bessel);
+            Holo = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Holo);
             PlaneWave = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.PlaneWave);
             TransducerTest = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.TransducerTest);
+
+            _pageCache = new Dictionary<string, Page>();
+            Page = new ReactiveProperty<Page>(new FocalPointView());
+
+            TransitPage = new ReactiveCommand<string>();
+            TransitPage.Subscribe(page =>
+            {
+                if (!_pageCache.ContainsKey(page)) _pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
+                Page.Value = _pageCache[page]!;
+            });
         }
     }
 }

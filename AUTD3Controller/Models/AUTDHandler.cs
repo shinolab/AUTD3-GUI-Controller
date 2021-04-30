@@ -92,6 +92,7 @@ namespace AUTD3Controller.Models
             {
                 GainSelect.Focus => instance.Focus.ToGain(),
                 GainSelect.Bessel => instance.Bessel.ToGain(),
+                GainSelect.Holo => instance.Holo.ToGain(),
                 GainSelect.PlaneWave => instance.PlaneWave.ToGain(),
                 GainSelect.TransducerTest => instance.TransducerTest.ToGain(),
                 _ => throw new ArgumentOutOfRangeException()

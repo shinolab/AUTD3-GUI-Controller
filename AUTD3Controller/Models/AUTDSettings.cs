@@ -101,6 +101,7 @@ namespace AUTD3Controller.Models
     {
         Focus,
         Bessel,
+        Holo,
         PlaneWave,
         TransducerTest
     }
@@ -139,6 +140,7 @@ namespace AUTD3Controller.Models
 
         [DataMember] public FocalPoint Focus { get; set; } = new FocalPoint(90, 70, 150, 0xFF);
         [DataMember] public BesselBeam Bessel { get; set; } = new BesselBeam(90, 70, 0, 0, 0, 1, AUTD.Pi / 10, 0xFF);
+        [DataMember] public Holo Holo { get; set; } = new Holo();
         [DataMember] public PlaneWave PlaneWave { get; set; } = new PlaneWave(0, 0, 1, 0xFF);
         [DataMember] public TransducerTest TransducerTest { get; set; } = new TransducerTest(0, 0xFF, 0);
 

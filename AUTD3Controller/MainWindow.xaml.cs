@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 08/04/2021
+ * Last Modified: 30/04/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -44,10 +44,12 @@ namespace AUTD3Controller
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 SettingManager.LoadSetting("settings.json");
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 // ignored
             }
         }
@@ -82,7 +84,7 @@ namespace AUTD3Controller
 
         private MainWindowModel Model { get; }
 
-        readonly private Dictionary<string, Page> _pageCache;
+        private readonly Dictionary<string, Page> _pageCache;
 
         public MainWindowViewModel()
         {
@@ -92,19 +94,23 @@ namespace AUTD3Controller
             Page = Model.ToReactivePropertyAsSynchronized(m => m.Page);
 
             TransitPage = new ReactiveCommand<string>();
-            TransitPage.Subscribe(page => {
+            TransitPage.Subscribe(page =>
+            {
                 if (!_pageCache.ContainsKey(page)) _pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
                 Page.Value = _pageCache[page]!;
             });
 
             ButtonPower = new AsyncReactiveCommand();
-            ButtonPower.Subscribe(async _ => {
+            ButtonPower.Subscribe(async _ =>
+            {
                 var vm = new ConfirmDialogViewModel() { Message = { Value = "Are you sure to quit the application?" } };
-                var dialog = new ConfirmDialog() {
+                var dialog = new ConfirmDialog()
+                {
                     DataContext = vm
                 };
                 var res = await DialogHost.Show(dialog, "MessageDialogHost");
-                if (res is bool quit && quit) {
+                if (res is bool quit && quit)
+                {
                     AUTDHandler.Instance.Dispose();
                     SettingManager.SaveSetting("settings.json");
                     Application.Current.Shutdown();
@@ -112,8 +118,10 @@ namespace AUTD3Controller
             });
 
             OpenUrl = new ReactiveCommand<string>();
-            OpenUrl.Subscribe(url => {
-                var psi = new ProcessStartInfo {
+            OpenUrl.Subscribe(url =>
+            {
+                var psi = new ProcessStartInfo
+                {
                     FileName = url,
                     UseShellExecute = true
                 };
@@ -121,8 +129,10 @@ namespace AUTD3Controller
             });
 
             Save = new AsyncReactiveCommand();
-            Save.Subscribe(async _ => {
-                var dialogArgs = new SaveFileDialogArguments() {
+            Save.Subscribe(async _ =>
+            {
+                var dialogArgs = new SaveFileDialogArguments()
+                {
                     Width = 600,
                     Height = 800,
                     Filters = "json files|*.json",
@@ -131,12 +141,15 @@ namespace AUTD3Controller
                 };
                 var result = await SaveFileDialog.ShowDialogAsync("MessageDialogHost", dialogArgs);
                 if (result.Canceled) return;
-                try {
+                try
+                {
                     SettingManager.SaveSetting(result.File);
                 }
-                catch {
+                catch
+                {
                     var vm = new ErrorDialogViewModel { Message = { Value = "Failed to save settings." } };
-                    var dialog = new ErrorDialog {
+                    var dialog = new ErrorDialog
+                    {
                         DataContext = vm
                     };
                     await DialogHost.Show(dialog, "MessageDialogHost");
@@ -144,20 +157,25 @@ namespace AUTD3Controller
             });
 
             Load = new AsyncReactiveCommand();
-            Load.Subscribe(async _ => {
-                var dialogArgs = new OpenFileDialogArguments() {
+            Load.Subscribe(async _ =>
+            {
+                var dialogArgs = new OpenFileDialogArguments()
+                {
                     Width = 600,
                     Height = 800,
                     Filters = "json files|*.json"
                 };
                 var result = await OpenFileDialog.ShowDialogAsync("MessageDialogHost", dialogArgs);
                 if (result.Canceled) return;
-                try {
+                try
+                {
                     SettingManager.LoadSetting(result.File);
                 }
-                catch {
+                catch
+                {
                     var vm = new ErrorDialogViewModel { Message = { Value = "Failed to load settings." } };
-                    var dialog = new ErrorDialog {
+                    var dialog = new ErrorDialog
+                    {
                         DataContext = vm
                     };
                     await DialogHost.Show(dialog, "MessageDialogHost");
@@ -165,12 +183,16 @@ namespace AUTD3Controller
             });
 
             Start = AUTDHandler.Instance.IsRunning.Select(x => !x).ToAsyncReactiveCommand();
-            Start.Subscribe(async _ => {
-                if (!AUTDHandler.Instance.IsOpen.Value) {
+            Start.Subscribe(async _ =>
+            {
+                if (!AUTDHandler.Instance.IsOpen.Value)
+                {
                     var res = await Task.Run(() => AUTDHandler.Instance.Open());
-                    if (res != null) {
+                    if (res != null)
+                    {
                         var vm = new ErrorDialogViewModel { Message = { Value = $"Failed to open AUTD: {res}.\nSee Link options." } };
-                        var dialog = new ErrorDialog {
+                        var dialog = new ErrorDialog
+                        {
                             DataContext = vm
                         };
                         await DialogHost.Show(dialog, "MessageDialogHost");
@@ -183,7 +205,8 @@ namespace AUTD3Controller
 
             });
             Stop = AUTDHandler.Instance.IsRunning.Select(x => x).ToReactiveCommand();
-            Stop.Subscribe(_ => {
+            Stop.Subscribe(_ =>
+            {
                 AUTDHandler.Instance.Stop();
             });
         }

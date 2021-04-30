@@ -1,5 +1,5 @@
 ﻿/*
- * File: Gain.cs
+ * File: IGain.cs
  * Project: Gain
  * Created Date: 30/04/2021
  * Author: Shun Suzuki
