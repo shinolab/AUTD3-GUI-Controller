@@ -50,7 +50,7 @@ namespace AUTD3Controller
             }
             catch (Exception)
             {
-                // ignored
+                // ignore
             }
         }
     }

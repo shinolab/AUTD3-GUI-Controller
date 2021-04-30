@@ -11,7 +11,6 @@
  * 
  */
 
-
 using AUTD3Sharp.Utils;
 
 namespace AUTD3Controller.Models.Gain
@@ -22,6 +21,8 @@ namespace AUTD3Controller.Models.Gain
         public float Y { get; set; }
         public float Z { get; set; }
         public byte Duty { get; set; }
+
+        public FocalPoint() { }
 
         public FocalPoint(float x, float y, float z, byte duty = 0xFF)
         {

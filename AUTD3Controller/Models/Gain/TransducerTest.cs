@@ -19,6 +19,8 @@ namespace AUTD3Controller.Models.Gain
         public byte Duty { get; set; }
         public byte Phase { get; set; }
 
+        public TransducerTest() { }
+
         public TransducerTest(int index, byte duty, byte phase)
         {
             Index = index;

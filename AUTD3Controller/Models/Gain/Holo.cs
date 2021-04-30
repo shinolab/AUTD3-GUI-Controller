@@ -28,8 +28,8 @@ namespace AUTD3Controller.Models.Gain
 
     public class Holo : IGain
     {
-        public List<Vector3f> Foci;
-        public List<float> Amps;
+        public List<Vector3f> Foci { get; set; }
+        public List<float> Amps { get; set; }
 
         public OptMethod OptMethod { get; set; }
 

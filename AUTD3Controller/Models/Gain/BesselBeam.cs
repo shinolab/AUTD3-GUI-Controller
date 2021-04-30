@@ -28,6 +28,8 @@ namespace AUTD3Controller.Models.Gain
         public float Theta { get; set; }
         public byte Duty { get; set; }
 
+        public BesselBeam() { }
+
         public BesselBeam(float x, float y, float z, float dx, float dy, float dz, float theta, byte duty = 0xFF)
         {
             X = x;

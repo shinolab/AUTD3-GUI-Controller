@@ -23,6 +23,8 @@ namespace AUTD3Controller.Models.Gain
 
         public byte Duty { get; set; }
 
+        public PlaneWave() { }
+
         public PlaneWave(float dx, float dy, float dz, byte duty = 0xFF)
         {
             DirX = dx;
