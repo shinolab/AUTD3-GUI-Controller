@@ -4,7 +4,7 @@ Project: Views
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 07/04/2021
+Last Modified: 30/04/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -73,15 +73,14 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="x: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="y: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Row="2" Grid.Column="0" Text="z: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-
                                 <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding FocusX.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Focus.Value.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding FocusY.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Focus.Value.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                                 <TextBox Grid.Row="2" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding FocusZ.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Focus.Value.Z, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                             </Grid>
                         </GroupBox>
@@ -104,9 +103,11 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="duty: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-
-                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding FocusDuty.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="duty: " FontSize="20" HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           Foreground="{StaticResource MaterialDesignDarkForeground}"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                         Text="{Binding Focus.Value.Duty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                         Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                             </Grid>
                         </GroupBox>
                     </WrapPanel>
@@ -147,13 +148,13 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                 <TextBlock Grid.Row="2" Grid.Column="0" Text="z: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                                 <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding BesselX.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Bessel.Value.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding BesselY.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Bessel.Value.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                                 <TextBox Grid.Row="2" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding BesselZ.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Bessel.Value.Z, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                             </Grid>
                         </GroupBox>
@@ -183,13 +184,13 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                 <TextBlock Grid.Row="2" Grid.Column="0" Text="z: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                                 <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding BesselDX.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Bessel.Value.DirX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding BesselDY.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Bessel.Value.DirY, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                                 <TextBox Grid.Row="2" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding BesselDZ.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Bessel.Value.DirZ, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                             </Grid>
                         </GroupBox>
@@ -216,8 +217,8 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                 <TextBlock Grid.Row="0" Grid.Column="0" Text="theta z: " FontSize="20" TextAlignment="Right" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                                 <TextBlock Grid.Row="1" Grid.Column="0" Text="duty: " FontSize="20" TextAlignment="Right" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
-                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding BesselTheta.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding BesselDuty.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding Bessel.Value.Theta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" Text="{Binding Bessel.Value.Duty, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                             </Grid>
                         </GroupBox>
                     </WrapPanel>

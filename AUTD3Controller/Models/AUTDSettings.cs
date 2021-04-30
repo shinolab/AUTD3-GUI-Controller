@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 30/04/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -16,6 +16,8 @@ using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using AUTD3Controller.Helpers;
+using AUTD3Controller.Models.Gain;
+using AUTD3Sharp;
 using Reactive.Bindings;
 
 namespace AUTD3Controller.Models
@@ -133,31 +135,9 @@ namespace AUTD3Controller.Models
         [DataMember]
         public ModulationSelect ModulationSelect { get; set; }
 
-        [DataMember]
-        public float FocusX { get; set; } = 90;
-        [DataMember]
-        public float FocusY { get; set; } = 70;
-        [DataMember]
-        public float FocusZ { get; set; } = 150;
-        [DataMember]
-        public byte FocusDuty { get; set; } = 0xFF;
+        [DataMember] public FocalPoint Focus { get; set; } = new FocalPoint(90, 70, 150, 0xFF);
 
-        [DataMember]
-        public float BesselX { get; set; } = 90;
-        [DataMember]
-        public float BesselY { get; set; } = 70;
-        [DataMember]
-        public float BesselZ { get; set; } = 0;
-        [DataMember]
-        public float BesselDX { get; set; } = 0;
-        [DataMember]
-        public float BesselDY { get; set; } = 0;
-        [DataMember]
-        public float BesselDZ { get; set; } = 1.0f;
-        [DataMember]
-        public float BesselTheta { get; set; } = 0.1f * MathF.PI;
-        [DataMember]
-        public byte BesselDuty { get; set; } = 0xFF;
+        [DataMember] public BesselBeam Bessel { get; set; } = new BesselBeam(90, 70, 0, 0, 0, 1, AUTD.Pi / 10, 0xFF);
 
         [DataMember]
         public int SinFrequency { get; set; } = 150;
