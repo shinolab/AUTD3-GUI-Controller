@@ -45,7 +45,7 @@ namespace AUTD3Controller.Models
             _autd.ClearDevices();
             foreach (var item in AUTDSettings.Instance.GeometriesReactive)
             {
-                _autd.AddDevice(new Vector3f(item.X.Value, item.Y.Value, item.Z.Value), new Vector3f(item.RZ1.Value, item.RY.Value, item.RZ2.Value));
+                _autd.AddDevice(new Vector3f(item.X.Value, item.Y.Value, item.Z.Value), new Vector3f(item.RotateZ1.Value, item.RotateY.Value, item.RotateZ2.Value));
             }
         }
 
@@ -63,7 +63,7 @@ namespace AUTD3Controller.Models
                             _autd.NumDevices),
                     LinkSelect.LocalTwinCAT =>
                         Link.LocalEtherCATLink(),
-                    _ => throw new NotImplementedException(),
+                    _ => throw new NotImplementedException()
                 };
 
                 if (!_autd.OpenWith(link)) return AUTD.LastError;

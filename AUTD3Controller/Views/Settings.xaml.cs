@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace AUTD3Controller.Views
+﻿namespace AUTD3Controller.Views
 {
-    public partial class Settings : Page
+    public partial class Settings
     {
         public Settings()
         {

@@ -84,11 +84,9 @@ namespace AUTD3Controller
 
         private MainWindowModel Model { get; }
 
-        private readonly Dictionary<string, Page> _pageCache;
-
         public MainWindowViewModel()
         {
-            _pageCache = new Dictionary<string, Page>();
+            Dictionary<string, Page> pageCache = new Dictionary<string, Page>();
 
             Model = new MainWindowModel();
             Page = Model.ToReactivePropertyAsSynchronized(m => m.Page);
@@ -96,15 +94,15 @@ namespace AUTD3Controller
             TransitPage = new ReactiveCommand<string>();
             TransitPage.Subscribe(page =>
             {
-                if (!_pageCache.ContainsKey(page)) _pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
-                Page.Value = _pageCache[page]!;
+                if (!pageCache.ContainsKey(page)) pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
+                Page.Value = pageCache[page]!;
             });
 
             ButtonPower = new AsyncReactiveCommand();
             ButtonPower.Subscribe(async _ =>
             {
-                var vm = new ConfirmDialogViewModel() { Message = { Value = "Are you sure to quit the application?" } };
-                var dialog = new ConfirmDialog()
+                var vm = new ConfirmDialogViewModel { Message = { Value = "Are you sure to quit the application?" } };
+                var dialog = new ConfirmDialog
                 {
                     DataContext = vm
                 };
@@ -131,7 +129,7 @@ namespace AUTD3Controller
             Save = new AsyncReactiveCommand();
             Save.Subscribe(async _ =>
             {
-                var dialogArgs = new SaveFileDialogArguments()
+                var dialogArgs = new SaveFileDialogArguments
                 {
                     Width = 600,
                     Height = 800,
@@ -159,7 +157,7 @@ namespace AUTD3Controller
             Load = new AsyncReactiveCommand();
             Load.Subscribe(async _ =>
             {
-                var dialogArgs = new OpenFileDialogArguments()
+                var dialogArgs = new OpenFileDialogArguments
                 {
                     Width = 600,
                     Height = 800,

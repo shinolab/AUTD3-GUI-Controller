@@ -4,7 +4,7 @@
  * Created Date: 07/04/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 30/04/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -27,14 +27,15 @@ namespace AUTD3Controller.Models
             public TotalSetting()
             {
                 General = General.Instance;
-                AUTDSettings = AUTDSettings.Instance; ;
+                AUTDSettings = AUTDSettings.Instance;
             }
         }
 
         internal static void CopyGeometry()
         {
             AUTDSettings.Instance.Geometries = new GeometrySetting[AUTDSettings.Instance.GeometriesReactive.Count];
-            for (var i = 0; i < AUTDSettings.Instance.GeometriesReactive.Count; i++) {
+            for (var i = 0; i < AUTDSettings.Instance.GeometriesReactive.Count; i++)
+            {
                 AUTDSettings.Instance.Geometries[i] = new GeometrySetting(AUTDSettings.Instance.GeometriesReactive[i]);
             }
         }
@@ -53,8 +54,9 @@ namespace AUTD3Controller.Models
         internal static void SaveSetting(string path)
         {
             CopyGeometry();
-            var options = new JsonSerializerOptions {
-                WriteIndented = true,
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
             };
             var jsonString = JsonSerializer.Serialize(new TotalSetting(), options);
             File.WriteAllText(path, jsonString);

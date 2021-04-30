@@ -34,11 +34,11 @@ namespace AUTD3Controller.Models
         [DataMember]
         public float Z { get; set; }
         [DataMember]
-        public float RZ1 { get; set; }
+        public float RotateZ1 { get; set; }
         [DataMember]
-        public float RY { get; set; }
+        public float RotateY { get; set; }
         [DataMember]
-        public float RZ2 { get; set; }
+        public float RotateZ2 { get; set; }
 
         public GeometrySetting() { }
 
@@ -48,9 +48,9 @@ namespace AUTD3Controller.Models
             X = obj.X.Value;
             Y = obj.Y.Value;
             Z = obj.Z.Value;
-            RZ1 = obj.RZ1.Value;
-            RY = obj.RY.Value;
-            RZ2 = obj.RZ2.Value;
+            RotateZ1 = obj.RotateZ1.Value;
+            RotateY = obj.RotateY.Value;
+            RotateZ2 = obj.RotateZ2.Value;
         }
     }
 
@@ -64,9 +64,9 @@ namespace AUTD3Controller.Models
         public ReactiveProperty<float> X { get; }
         public ReactiveProperty<float> Y { get; }
         public ReactiveProperty<float> Z { get; }
-        public ReactiveProperty<float> RZ1 { get; }
-        public ReactiveProperty<float> RY { get; }
-        public ReactiveProperty<float> RZ2 { get; }
+        public ReactiveProperty<float> RotateZ1 { get; }
+        public ReactiveProperty<float> RotateY { get; }
+        public ReactiveProperty<float> RotateZ2 { get; }
 
         public GeometrySettingReactive(int id)
         {
@@ -74,9 +74,9 @@ namespace AUTD3Controller.Models
             X = new ReactiveProperty<float>();
             Y = new ReactiveProperty<float>();
             Z = new ReactiveProperty<float>();
-            RZ1 = new ReactiveProperty<float>();
-            RY = new ReactiveProperty<float>();
-            RZ2 = new ReactiveProperty<float>();
+            RotateZ1 = new ReactiveProperty<float>();
+            RotateY = new ReactiveProperty<float>();
+            RotateZ2 = new ReactiveProperty<float>();
         }
 
         public GeometrySettingReactive(GeometrySetting obj)
@@ -85,9 +85,9 @@ namespace AUTD3Controller.Models
             X = new ReactiveProperty<float>(obj.X);
             Y = new ReactiveProperty<float>(obj.Y);
             Z = new ReactiveProperty<float>(obj.Z);
-            RZ1 = new ReactiveProperty<float>(obj.RZ1);
-            RY = new ReactiveProperty<float>(obj.RY);
-            RZ2 = new ReactiveProperty<float>(obj.RZ2);
+            RotateZ1 = new ReactiveProperty<float>(obj.RotateZ1);
+            RotateY = new ReactiveProperty<float>(obj.RotateY);
+            RotateZ2 = new ReactiveProperty<float>(obj.RotateZ2);
         }
     }
 
@@ -138,10 +138,10 @@ namespace AUTD3Controller.Models
         [DataMember]
         public ModulationSelect ModulationSelect { get; set; }
 
-        [DataMember] public FocalPoint Focus { get; set; } = new FocalPoint(90, 70, 150, 0xFF);
-        [DataMember] public BesselBeam Bessel { get; set; } = new BesselBeam(90, 70, 0, 0, 0, 1, AUTD.Pi / 10, 0xFF);
+        [DataMember] public FocalPoint Focus { get; set; } = new FocalPoint(90, 70, 150);
+        [DataMember] public BesselBeam Bessel { get; set; } = new BesselBeam(90, 70, 0, 0, 0, 1, AUTD.Pi / 10);
         [DataMember] public Holo Holo { get; set; } = new Holo();
-        [DataMember] public PlaneWave PlaneWave { get; set; } = new PlaneWave(0, 0, 1, 0xFF);
+        [DataMember] public PlaneWave PlaneWave { get; set; } = new PlaneWave(0, 0, 1);
         [DataMember] public TransducerTest TransducerTest { get; set; } = new TransducerTest(0, 0xFF, 0);
 
         [DataMember]

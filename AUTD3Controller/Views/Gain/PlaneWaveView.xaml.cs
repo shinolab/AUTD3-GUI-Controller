@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace AUTD3Controller.Views.Gain
+﻿namespace AUTD3Controller.Views.Gain
 {
-    public partial class PlaneWaveView : Page
+    public partial class PlaneWaveView
     {
         public PlaneWaveView()
         {

@@ -1,8 +1,6 @@
-﻿using System.Windows;
-
-namespace AUTD3Controller
+﻿namespace AUTD3Controller
 {
-    public partial class App : Application
+    public partial class App
     {
     }
 }

@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 30/04/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -36,14 +36,10 @@ namespace AUTD3Controller.Helpers
         private void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.OldItems != null)
-                foreach (INotifyPropertyChanged? item in e.OldItems)
-                    if (item != null)
-                        item.PropertyChanged -= ItemPropertyChanged;
+                foreach (INotifyPropertyChanged? item in e.OldItems) if (item != null) item.PropertyChanged -= ItemPropertyChanged;
 
-            if (e.NewItems != null)
-                foreach (INotifyPropertyChanged? item in e.NewItems)
-                    if (item != null)
-                        item.PropertyChanged += ItemPropertyChanged;
+            if (e.NewItems == null) return;
+            foreach (INotifyPropertyChanged? item in e.NewItems) if (item != null) item.PropertyChanged += ItemPropertyChanged;
         }
 
         private void ItemPropertyChanged(object sender, PropertyChangedEventArgs e)

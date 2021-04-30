@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 30/04/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -21,15 +21,9 @@ namespace AUTD3Controller.Converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(parameter is string parameterString)) {
-                return System.Windows.DependencyProperty.UnsetValue;
-            }
+            if (!(parameter is string parameterString)) return System.Windows.DependencyProperty.UnsetValue;
 
-            if (value == null) return System.Windows.DependencyProperty.UnsetValue;
-
-            if (Enum.IsDefined(value.GetType(), value) == false) {
-                return System.Windows.DependencyProperty.UnsetValue;
-            }
+            if (Enum.IsDefined(value.GetType(), value) == false) return System.Windows.DependencyProperty.UnsetValue;
 
             return (int)Enum.Parse(value.GetType(), parameterString) == (int)value;
         }

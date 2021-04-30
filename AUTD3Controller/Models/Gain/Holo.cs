@@ -41,7 +41,7 @@ namespace AUTD3Controller.Models.Gain
 
         public AUTD3Sharp.Gain ToGain() => OptMethod switch
         {
-            OptMethod.SDP => AUTD3Sharp.Gain.HoloGainSDP(Foci.ToArray(), Amps.ToArray(), null),
+            OptMethod.SDP => AUTD3Sharp.Gain.HoloGainSDP(Foci.ToArray(), Amps.ToArray(), null)
         };
     }
 }

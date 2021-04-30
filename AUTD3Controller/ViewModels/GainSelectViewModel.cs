@@ -34,7 +34,6 @@ namespace AUTD3Controller.ViewModels
         public ReactiveCommand AppendGainCommand { get; }
 
         public ReactiveProperty<Page> Page { get; }
-        private readonly Dictionary<string, Page> _pageCache;
         public ReactiveCommand<string> TransitPage { get; }
 
         public ReactiveProperty<BesselBeam> Bessel { get; }
@@ -58,14 +57,14 @@ namespace AUTD3Controller.ViewModels
             PlaneWave = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.PlaneWave);
             TransducerTest = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.TransducerTest);
 
-            _pageCache = new Dictionary<string, Page>();
+            Dictionary<string, Page> pageCache = new Dictionary<string, Page>();
             Page = new ReactiveProperty<Page>(new FocalPointView());
 
             TransitPage = new ReactiveCommand<string>();
             TransitPage.Subscribe(page =>
             {
-                if (!_pageCache.ContainsKey(page)) _pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
-                Page.Value = _pageCache[page]!;
+                if (!pageCache.ContainsKey(page)) pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
+                Page.Value = pageCache[page]!;
             });
         }
     }

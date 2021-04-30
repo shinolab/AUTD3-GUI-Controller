@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace AUTD3Controller.Views.Gain
+﻿namespace AUTD3Controller.Views.Gain
 {
-    public partial class HoloView : Page
+    public partial class HoloView
     {
         public HoloView()
         {
