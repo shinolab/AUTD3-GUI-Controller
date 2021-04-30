@@ -18,6 +18,8 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:converter="clr-namespace:AUTD3Controller.Converter"
       xmlns:gain="clr-namespace:AUTD3Controller.ViewModels.Gain"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:dd="urn:gong-wpf-dragdrop"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="HoloView">
@@ -28,10 +30,228 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
 
     <Page.Resources>
         <converter:FloatToStringConverter x:Key="FloatConverter"/>
+        <converter:EnumToVisibilityConverter x:Key="EnumToVisibility"/>
+        <Style
+            x:Key="ZeroPaddingColumnHeader" 
+            TargetType="GridViewColumnHeader"
+            BasedOn="{StaticResource {x:Type GridViewColumnHeader}}">
+            <Setter Property="Padding" Value="0,0" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="FontSize" Value="{StaticResource FontSize}" />
+        </Style>
+        <Style x:Key="StretchListViewItem" TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignGridViewItem}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        </Style>
     </Page.Resources>
 
-
     <Grid>
-        
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <WrapPanel>
+                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" Margin="0 12 0 0">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontSize="{StaticResource HeaderFontSize}" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                        Text="Points and amplitudes" />
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Margin="0 12 0 0" Orientation="Horizontal">
+                            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" BorderBrush="{x:Null}" Command="{Binding AddItem}">
+                                <materialDesign:PackIcon Kind="Add" Width="{StaticResource ActionButtonSize}" Height="{StaticResource ActionButtonSize}"/>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" Margin="4 0 0 0" BorderBrush="{x:Null}" Command="{Binding RemoveItem}">
+                                <materialDesign:PackIcon Kind="Minus" Width="{StaticResource ActionButtonSize}" Height="{StaticResource ActionButtonSize}"/>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" Margin="4 0 0 0" BorderBrush="{x:Null}" Command="{Binding UpItem}">
+                                <materialDesign:PackIcon Kind="ArrowUp" Width="{StaticResource ActionButtonSize}" Height="{StaticResource ActionButtonSize}"/>
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" Margin="4 0 0 0"  BorderBrush="{x:Null}" Command="{Binding DownItem}">
+                                <materialDesign:PackIcon Kind="ArrowDown" Width="{StaticResource ActionButtonSize}" Height="{StaticResource ActionButtonSize}"/>
+                            </Button>
+                        </StackPanel>
+                        <Grid Grid.Row="1" Margin="0 12 0 0" >
+                            <ListView ItemsSource="{Binding HoloSettings, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding Current.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                              FontSize="{StaticResource FontSize}"
+                              dd:DragDrop.IsDragSource="True"
+                              dd:DragDrop.IsDropTarget="True"
+                              dd:DragDrop.DropHandler="{Binding}"
+                              ItemContainerStyle="{StaticResource StretchListViewItem}">
+                                <ListView.View>
+                                    <GridView AllowsColumnReorder="False" ColumnHeaderContainerStyle="{StaticResource ZeroPaddingColumnHeader}">
+                                        <GridViewColumn Header="x" Width="{StaticResource ColumnWidth}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border HorizontalAlignment="Stretch"  BorderBrush="{x:Null}" Height="{StaticResource ColumnHeight}">
+                                                        <TextBox TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                                                 Text="{Binding Path=X.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="y" Width="{StaticResource ColumnWidth}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border HorizontalAlignment="Stretch"  BorderBrush="{x:Null}" Height="{StaticResource ColumnHeight}">
+                                                        <TextBox FontSize="16"  TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center"  
+                                                 Text="{Binding Path=Y.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="z" Width="{StaticResource ColumnWidth}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border HorizontalAlignment="Stretch"  BorderBrush="{x:Null}" Height="{StaticResource ColumnHeight}">
+                                                        <TextBox TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center"  
+                                                 Text="{Binding Path=Z.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                        <GridViewColumn Header="amp" Width="{StaticResource ColumnWidth}">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Border HorizontalAlignment="Stretch" BorderBrush="{x:Null}" Height="{StaticResource ColumnHeight}">
+                                                        <TextBox TextAlignment="Right" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
+                                                 Text="{Binding Path=Amp.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"/>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" 
+                          VerticalAlignment="Top"
+                          Margin="12 12 0 0">
+                    <GroupBox.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock FontSize="{StaticResource HeaderFontSize}" VerticalAlignment="Center" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Text="Parameters" />
+                        </DataTemplate>
+                    </GroupBox.HeaderTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <ComboBox FontSize="16" Width="80"
+                                  HorizontalAlignment="Left"
+                                  Style="{StaticResource MaterialDesignComboBox}"
+                                  Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                                  ItemsSource="{Binding OptMethods}"
+                                  SelectedValue="{Binding Holo.Value.OptMethod, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Grid Grid.Row="1" Visibility="{Binding Holo.Value.OptMethod, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter=SDP}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="regularization: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="repeat: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="lambda: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="normalize: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.SDPParams.Regularization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.SDPParams.Repeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.SDPParams.Lambda, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            <CheckBox Grid.Row="3" Grid.Column="1" Width="80" VerticalAlignment="Bottom"
+                                      Background="{StaticResource MaterialDesignDarkForeground}"
+                                      IsChecked="{Binding Holo.Value.SDPParams.NormalizeAmp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Visibility="{Binding Holo.Value.OptMethod, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter=EVD}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="regularization: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="normalize: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.EVDParams.Regularization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            <CheckBox Grid.Row="1" Grid.Column="1" Width="80" VerticalAlignment="Bottom"
+                                      Background="{StaticResource MaterialDesignDarkForeground}"
+                                      IsChecked="{Binding Holo.Value.EVDParams.NormalizeAmp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Visibility="{Binding Holo.Value.OptMethod, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter=GS}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="repeat: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.GSRepeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Visibility="{Binding Holo.Value.OptMethod, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter=GSPAT}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="repeat: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.GSPATRepeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Visibility="{Binding Holo.Value.OptMethod, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter=LM}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="eps1: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="eps2: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="kMax: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="tau: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.NLSParams.Eps1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.NLSParams.Eps2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            <TextBox Grid.Row="2" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.NLSParams.KMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            <TextBox Grid.Row="3" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.NLSParams.Tau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" 
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        </Grid>
+                    </Grid>
+                </GroupBox>
+            </WrapPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

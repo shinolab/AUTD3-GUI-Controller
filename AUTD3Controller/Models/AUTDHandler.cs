@@ -90,8 +90,8 @@ namespace AUTD3Controller.Models
             var instance = AUTDSettings.Instance;
             var gain = instance.GainSelect switch
             {
-                GainSelect.Focus => instance.Focus.ToGain(),
-                GainSelect.Bessel => instance.Bessel.ToGain(),
+                GainSelect.FocalPoint => instance.Focus.ToGain(),
+                GainSelect.BesselBeam => instance.Bessel.ToGain(),
                 GainSelect.Holo => instance.Holo.ToGain(),
                 GainSelect.PlaneWave => instance.PlaneWave.ToGain(),
                 GainSelect.TransducerTest => instance.TransducerTest.ToGain(),

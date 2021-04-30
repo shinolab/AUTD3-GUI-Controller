@@ -99,8 +99,8 @@ namespace AUTD3Controller.Models
 
     public enum GainSelect
     {
-        Focus,
-        Bessel,
+        FocalPoint,
+        BesselBeam,
         Holo,
         PlaneWave,
         TransducerTest

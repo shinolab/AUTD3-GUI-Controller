@@ -14,6 +14,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reactive.Linq;
 using System.Windows.Controls;
 using AUTD3Controller.Models;
@@ -30,7 +31,6 @@ namespace AUTD3Controller.ViewModels
         public event PropertyChangedEventHandler PropertyChanged = null!;
 #pragma warning restore 414
 
-        public ReactiveProperty<GainSelect> GainSelect { get; }
         public ReactiveCommand AppendGainCommand { get; }
 
         public ReactiveProperty<Page> Page { get; }
@@ -41,11 +41,8 @@ namespace AUTD3Controller.ViewModels
         public ReactiveProperty<PlaneWave> PlaneWave { get; }
         public ReactiveProperty<TransducerTest> TransducerTest { get; }
 
-        public OptMethod[] Palettes { get; } = (OptMethod[])Enum.GetValues(typeof(OptMethod));
-
         public GainSelectViewModel()
         {
-            GainSelect = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.GainSelect);
             AppendGainCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
             AppendGainCommand.Subscribe(_ =>
             {
@@ -65,6 +62,7 @@ namespace AUTD3Controller.ViewModels
             {
                 if (!pageCache.ContainsKey(page)) pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
                 Page.Value = pageCache[page]!;
+                AUTDSettings.Instance.GainSelect = (GainSelect)Enum.Parse(typeof(GainSelect), page.Split('.').LastOrDefault()?[..^4] ?? string.Empty);
             });
         }
     }

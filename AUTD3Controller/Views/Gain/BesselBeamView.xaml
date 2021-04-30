@@ -107,7 +107,8 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     </Grid>
                 </GroupBox>
                 <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" 
-                              Margin="12 12 0 0">
+                          VerticalAlignment="Top"
+                          Margin="12 12 0 0">
                     <GroupBox.HeaderTemplate>
                         <DataTemplate>
                             <TextBlock

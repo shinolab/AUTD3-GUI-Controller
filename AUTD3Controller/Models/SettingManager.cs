@@ -12,8 +12,10 @@
  */
 
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using AUTD3Controller.Helpers;
+using AUTD3Controller.Models.Gain;
 
 namespace AUTD3Controller.Models
 {
@@ -31,29 +33,25 @@ namespace AUTD3Controller.Models
             }
         }
 
-        internal static void CopyGeometry()
-        {
-            AUTDSettings.Instance.Geometries = new GeometrySetting[AUTDSettings.Instance.GeometriesReactive.Count];
-            for (var i = 0; i < AUTDSettings.Instance.GeometriesReactive.Count; i++)
-            {
-                AUTDSettings.Instance.Geometries[i] = new GeometrySetting(AUTDSettings.Instance.GeometriesReactive[i]);
-            }
-        }
-
+        internal static void CopyGeometry() => AUTDSettings.Instance.Geometries = AUTDSettings.Instance.GeometriesReactive.Select(g => new GeometrySetting(g)).ToArray();
+        internal static void CopyHoloSetting() => AUTDSettings.Instance.Holo.HoloSettings = AUTDSettings.Instance.Holo.HoloSettingsReactive.Select(s => new HoloSetting(s)).ToArray();
         internal static void LoadGeometry()
         {
-            AUTDSettings.Instance.GeometriesReactive =
-                new ObservableCollectionWithItemNotify<GeometrySettingReactive>();
-
+            AUTDSettings.Instance.GeometriesReactive = new ObservableCollectionWithItemNotify<GeometrySettingReactive>();
             if (AUTDSettings.Instance.Geometries == null) return;
-
-            foreach (var geometry in AUTDSettings.Instance.Geometries)
-                AUTDSettings.Instance.GeometriesReactive.Add(new GeometrySettingReactive(geometry));
+            foreach (var geometry in AUTDSettings.Instance.Geometries) AUTDSettings.Instance.GeometriesReactive.Add(new GeometrySettingReactive(geometry));
+        }
+        internal static void LoadHoloSetting()
+        {
+            AUTDSettings.Instance.Holo.HoloSettingsReactive = new ObservableCollectionWithItemNotify<HoloSettingReactive>();
+            if (AUTDSettings.Instance.Holo.HoloSettings == null) return;
+            foreach (var s in AUTDSettings.Instance.Holo.HoloSettings) AUTDSettings.Instance.Holo.HoloSettingsReactive.Add(new HoloSettingReactive(s));
         }
 
         internal static void SaveSetting(string path)
         {
             CopyGeometry();
+            CopyHoloSetting();
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true
@@ -69,6 +67,7 @@ namespace AUTD3Controller.Models
             AUTDSettings.Instance = obj.AUTDSettings;
             General.Instance = obj.General;
             LoadGeometry();
+            LoadHoloSetting();
         }
     }
 }

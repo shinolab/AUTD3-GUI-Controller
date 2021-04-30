@@ -33,11 +33,11 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
             <RowDefinition />
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="Gain select" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
+        <TextBlock Text="Gain" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
         <WrapPanel Grid.Row="1" Margin="0 12 0 12">
-            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="Focus" Margin="0 12 0 0"
+            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="FocalPoint" Margin="0 12 0 0"
                     Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Gain.FocalPointView"/>
-            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="Bessel beam" Margin="12 12 0 0"
+            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="BesselBeam beam" Margin="12 12 0 0"
                     Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Gain.BesselBeamView"/>
             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="Plane wave" Margin="12 12 0 0"
                     Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Gain.PlaneWaveView"/>
