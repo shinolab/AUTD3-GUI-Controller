@@ -23,66 +23,34 @@ namespace AUTD3Controller.Models.Gain
 {
     public enum OptMethod
     {
-        SDP = 0,
-        EVD = 1,
-        GS = 2,
-        GSPAT = 3,
-        NAIVE = 4,
-        LM = 5
+        SDP,
+        EVD,
+        Naive,
+        GS,
+        GSPAT,
+        LM
     }
 
     public class SDPParams
     {
-        public float Regularization { get; set; } = -1;
-        public int Repeat { get; set; } = -1;
-        public float Lambda { get; set; } = -1;
+        public float Alpha { get; set; } = 1e-3f;
+        public ulong Repeat { get; set; } = 100;
+        public float Lambda { get; set; } = 0.9f;
         public bool NormalizeAmp { get; set; } = true;
-
-        internal AUTD3Sharp.Gain.SDPParams ToParam()
-        {
-            return new AUTD3Sharp.Gain.SDPParams()
-            {
-                Regularization = Regularization,
-                Repeat = Repeat,
-                Lambda = Lambda,
-                NormalizeAmp = NormalizeAmp
-            };
-        }
     }
 
     public class EVDParams
     {
-        public float Regularization { get; set; } = -1;
+        public float Gamma { get; set; } = 1;
         public bool NormalizeAmp { get; set; } = true;
-
-        internal AUTD3Sharp.Gain.EVDParams ToParam()
-        {
-            return new AUTD3Sharp.Gain.EVDParams()
-            {
-                Regularization = Regularization,
-                NormalizeAmp = NormalizeAmp
-            };
-        }
     }
 
     public class NLSParams
     {
-        public float Eps1 { get; set; } = -1;
-        public float Eps2 { get; set; } = -1;
-        public int KMax { get; set; } = -1;
-        public float Tau { get; set; } = -1;
-
-        internal AUTD3Sharp.Gain.NLSParams ToParam()
-        {
-            return new AUTD3Sharp.Gain.NLSParams()
-            {
-                Eps1 = Eps1,
-                Eps2 = Eps2,
-                KMax = KMax,
-                Tau = Tau,
-                Initial = null
-            };
-        }
+        public float Eps1 { get; set; } = 1e-8f;
+        public float Eps2 { get; set; } = 1e-8f;
+        public ulong KMax { get; set; } = 5;
+        public float Tau { get; set; } = 1e-3f;
     }
 
     public class HoloSettingReactive : INotifyPropertyChanged
@@ -159,12 +127,12 @@ namespace AUTD3Controller.Models.Gain
 
         public AUTD3Sharp.Gain ToGain() => OptMethod switch
         {
-            OptMethod.SDP => AUTD3Sharp.Gain.HoloGainSDP(Foci, Amps, SDPParams.ToParam()),
-            OptMethod.EVD => AUTD3Sharp.Gain.HoloGainEVD(Foci, Amps, EVDParams.ToParam()),
+            OptMethod.SDP => AUTD3Sharp.Gain.HoloGainSDP(Foci, Amps, SDPParams.Alpha, SDPParams.Lambda, SDPParams.Repeat, SDPParams.NormalizeAmp),
+            OptMethod.EVD => AUTD3Sharp.Gain.HoloGainEVD(Foci, Amps, EVDParams.Gamma, EVDParams.NormalizeAmp),
             OptMethod.GS => AUTD3Sharp.Gain.HoloGainGS(Foci, Amps, GSRepeat),
             OptMethod.GSPAT => AUTD3Sharp.Gain.HoloGainGSPAT(Foci, Amps, GSPATRepeat),
-            OptMethod.NAIVE => AUTD3Sharp.Gain.HoloGainNaive(Foci, Amps),
-            OptMethod.LM => AUTD3Sharp.Gain.HoloGainLM(Foci, Amps, NLSParams.ToParam()),
+            OptMethod.Naive => AUTD3Sharp.Gain.HoloGainNaive(Foci, Amps),
+            OptMethod.LM => AUTD3Sharp.Gain.HoloGainLM(Foci, Amps, NLSParams.Eps1, NLSParams.Eps2, NLSParams.Tau, NLSParams.KMax),
             _ => throw new ArgumentOutOfRangeException()
         };
 

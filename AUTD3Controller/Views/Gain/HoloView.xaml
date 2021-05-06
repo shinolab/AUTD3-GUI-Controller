@@ -158,12 +158,12 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="regularization: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="alpha: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="repeat: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="lambda: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBlock Grid.Row="3" Grid.Column="0" Text="normalize: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding Holo.Value.SDPParams.Regularization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Holo.Value.SDPParams.Alpha, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                             <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
                                      Text="{Binding Holo.Value.SDPParams.Repeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -185,10 +185,10 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                 <RowDefinition />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="regularization: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="gamma: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBlock Grid.Row="1" Grid.Column="0" Text="normalize: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding Holo.Value.EVDParams.Regularization, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Text="{Binding Holo.Value.EVDParams.Gamma, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                             <CheckBox Grid.Row="1" Grid.Column="1" Width="80" VerticalAlignment="Bottom"
                                       Background="{StaticResource MaterialDesignDarkForeground}"
@@ -200,9 +200,6 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="repeat: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
                                      Text="{Binding Holo.Value.GSRepeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -213,9 +210,6 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Grid.Column="0" Text="repeat: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                             <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
                                      Text="{Binding Holo.Value.GSPATRepeat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
