@@ -24,7 +24,7 @@ namespace AUTD3Controller.Models
         [JsonIgnore]
         public ObservableCollectionWithItemNotify<Vector3Reactive> PointsReactive { get; internal set; }
 
-        public Vector3f[]? Points { get; set; }
+        public Vector3Class[]? Points { get; set; }
 
         public float Frequency { get; set; }
 
@@ -37,7 +37,7 @@ namespace AUTD3Controller.Models
 
         public PointSequence ToPointSequence()
         {
-            var seq = AUTD.PointSequence();
+            var seq = PointSequence.Create();
             seq.AddPoints(PointsReactive.Select(s => new Vector3f(s.X.Value, s.Y.Value, s.Z.Value)).ToArray());
             seq.SetFrequency(Frequency);
             return seq;

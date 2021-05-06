@@ -12,7 +12,6 @@
  */
 
 using System.ComponentModel;
-using AUTD3Sharp.Utils;
 using Reactive.Bindings;
 
 namespace AUTD3Controller.Helpers
@@ -36,14 +35,14 @@ namespace AUTD3Controller.Helpers
             Z = new ReactiveProperty<float>();
         }
 
-        public Vector3Reactive(int no, Vector3f v)
+        public Vector3Reactive(int no, Vector3Class v)
         {
             No = new ReactiveProperty<int>(no);
-            X = new ReactiveProperty<float>(v.x);
-            Y = new ReactiveProperty<float>(v.y);
-            Z = new ReactiveProperty<float>(v.z);
+            X = new ReactiveProperty<float>(v.X);
+            Y = new ReactiveProperty<float>(v.Y);
+            Z = new ReactiveProperty<float>(v.Z);
         }
 
-        public Vector3f ToVector3f() => new Vector3f(X.Value, Y.Value, Z.Value);
+        public Vector3Class ToVector3() => new Vector3Class(X.Value, Y.Value, Z.Value);
     }
 }

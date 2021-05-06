@@ -35,7 +35,7 @@ namespace AUTD3Controller.Models
 
         internal static void CopyGeometry() => AUTDSettings.Instance.Geometries = AUTDSettings.Instance.GeometriesReactive.Select(g => new GeometrySetting(g)).ToArray();
         internal static void CopyHoloSetting() => AUTDSettings.Instance.Holo.HoloSettings = AUTDSettings.Instance.Holo.HoloSettingsReactive.Select(s => new HoloSetting(s)).ToArray();
-        internal static void CopySTM() => AUTDSettings.Instance.STM.Points = AUTDSettings.Instance.STM.PointsReactive.Select(s => s.ToVector3f()).ToArray();
+        internal static void CopySTM() => AUTDSettings.Instance.STM.Points = AUTDSettings.Instance.STM.PointsReactive.Select(s => s.ToVector3()).ToArray();
         internal static void LoadGeometry()
         {
             AUTDSettings.Instance.GeometriesReactive = new ObservableCollectionWithItemNotify<GeometrySettingReactive>();
