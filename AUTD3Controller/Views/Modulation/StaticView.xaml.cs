@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace AUTD3Controller.Views.Modulation
+﻿namespace AUTD3Controller.Views.Modulation
 {
-    public partial class StaticView : Page
+    public partial class StaticView
     {
         public StaticView()
         {

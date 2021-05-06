@@ -19,7 +19,6 @@ using System.Reactive.Linq;
 using System.Windows.Controls;
 using AUTD3Controller.Models;
 using AUTD3Controller.Models.Modulation;
-using AUTD3Controller.Views.Gain;
 using AUTD3Controller.Views.Modulation;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
