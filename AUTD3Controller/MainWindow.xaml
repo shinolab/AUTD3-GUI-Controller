@@ -120,10 +120,20 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     </ListViewItem>
                     <ListViewItem Padding="0">
                         <Grid>
-                            <materialDesign:PackIcon Kind="SineWave" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="4,0,0,0" Grid.ColumnSpan="2"/>
+                            <materialDesign:PackIcon Kind="SineWave" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="4,0,0,0"/>
                             <TextBlock Text="Modulation" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
                                     BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.ModulationSelect"
+                                    materialDesign:ButtonAssist.CornerRadius="0">
+                            </Button>
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Padding="0">
+                        <Grid>
+                            <materialDesign:PackIcon Kind="TimerOutline" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="4,0,0,0"/>
+                            <TextBlock Text="STM" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
+                            <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.STM"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>

@@ -148,6 +148,8 @@ namespace AUTD3Controller.Models
         [DataMember] public SineModulation Sine { get; set; } = new SineModulation(150, 1.0f, 0.5f);
         [DataMember] public StaticModulation Static { get; set; } = new StaticModulation(0xFF);
 
+        [DataMember] public STM STM { get; set; } = new STM();
+
         private AUTDSettings()
         {
             InterfaceName = string.Empty;

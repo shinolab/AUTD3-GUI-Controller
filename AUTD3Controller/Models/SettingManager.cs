@@ -4,7 +4,7 @@
  * Created Date: 07/04/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 30/04/2021
+ * Last Modified: 06/05/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -35,6 +35,7 @@ namespace AUTD3Controller.Models
 
         internal static void CopyGeometry() => AUTDSettings.Instance.Geometries = AUTDSettings.Instance.GeometriesReactive.Select(g => new GeometrySetting(g)).ToArray();
         internal static void CopyHoloSetting() => AUTDSettings.Instance.Holo.HoloSettings = AUTDSettings.Instance.Holo.HoloSettingsReactive.Select(s => new HoloSetting(s)).ToArray();
+        internal static void CopySTM() => AUTDSettings.Instance.STM.Points = AUTDSettings.Instance.STM.PointsReactive.Select(s => s.ToVector3f()).ToArray();
         internal static void LoadGeometry()
         {
             AUTDSettings.Instance.GeometriesReactive = new ObservableCollectionWithItemNotify<GeometrySettingReactive>();
@@ -47,11 +48,18 @@ namespace AUTD3Controller.Models
             if (AUTDSettings.Instance.Holo.HoloSettings == null) return;
             foreach (var s in AUTDSettings.Instance.Holo.HoloSettings) AUTDSettings.Instance.Holo.HoloSettingsReactive.Add(new HoloSettingReactive(s));
         }
+        internal static void LoadSTM()
+        {
+            AUTDSettings.Instance.STM.PointsReactive = new ObservableCollectionWithItemNotify<Vector3Reactive>();
+            if (AUTDSettings.Instance.STM.Points == null) return;
+            foreach (var (s, i) in AUTDSettings.Instance.STM.Points.Select((s, i) => (s, i))) AUTDSettings.Instance.STM.PointsReactive.Add(new Vector3Reactive(i, s));
+        }
 
         internal static void SaveSetting(string path)
         {
             CopyGeometry();
             CopyHoloSetting();
+            CopySTM();
             var options = new JsonSerializerOptions
             {
                 WriteIndented = true
@@ -68,6 +76,7 @@ namespace AUTD3Controller.Models
             General.Instance = obj.General;
             LoadGeometry();
             LoadHoloSetting();
+            LoadSTM();
         }
     }
 }

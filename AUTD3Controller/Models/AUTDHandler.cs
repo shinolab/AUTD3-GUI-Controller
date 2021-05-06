@@ -113,6 +113,14 @@ namespace AUTD3Controller.Models
             _autd.AppendModulationSync(gain);
         }
 
+        public void AppendSTM()
+        {
+            var instance = AUTDSettings.Instance;
+            var seq = instance.STM.ToPointSequence();
+            _autd.AppendSequence(seq);
+            IsRunning.Value = true;
+        }
+
         public void Stop()
         {
             _autd.Stop();
