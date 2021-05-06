@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 30/04/2021
+ * Last Modified: 06/05/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -17,6 +17,7 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using AUTD3Controller.Helpers;
 using AUTD3Controller.Models.Gain;
+using AUTD3Controller.Models.Modulation;
 using AUTD3Sharp;
 using Reactive.Bindings;
 
@@ -144,14 +145,8 @@ namespace AUTD3Controller.Models
         [DataMember] public PlaneWave PlaneWave { get; set; } = new PlaneWave(0, 0, 1);
         [DataMember] public TransducerTest TransducerTest { get; set; } = new TransducerTest(0, 0xFF, 0);
 
-        [DataMember]
-        public int SinFrequency { get; set; } = 150;
-        [DataMember]
-        public float SinAmp { get; set; } = 1.0f;
-        [DataMember]
-        public float SinOffset { get; set; } = 0.5f;
-        [DataMember]
-        public byte StaticDuty { get; set; } = 0xFF;
+        [DataMember] public SineModulation Sine { get; set; } = new SineModulation(150, 1.0f, 0.5f);
+        [DataMember] public StaticModulation Static { get; set; } = new StaticModulation(0xFF);
 
         private AUTDSettings()
         {

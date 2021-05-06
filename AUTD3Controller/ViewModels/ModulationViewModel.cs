@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 06/05/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -12,9 +12,15 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Reactive.Linq;
+using System.Windows.Controls;
 using AUTD3Controller.Models;
+using AUTD3Controller.Models.Modulation;
+using AUTD3Controller.Views.Gain;
+using AUTD3Controller.Views.Modulation;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
@@ -26,26 +32,33 @@ namespace AUTD3Controller.ViewModels
         public event PropertyChangedEventHandler PropertyChanged = null!;
 #pragma warning restore 414
 
-        public ReactiveProperty<ModulationSelect> ModulationSelect { get; }
         public ReactiveCommand AppendModulationCommand { get; }
 
-        public ReactiveProperty<int> SinFrequency { get; }
-        public ReactiveProperty<float> SinAmp { get; }
-        public ReactiveProperty<float> SinOffset { get; }
+        public ReactiveProperty<Page> Page { get; }
+        public ReactiveCommand<string> TransitPage { get; }
 
-        public ReactiveProperty<byte> StaticDuty { get; }
+
+        public ReactiveProperty<StaticModulation> Static { get; }
+        public ReactiveProperty<SineModulation> Sine { get; }
 
         public ModulationViewModel()
         {
-            ModulationSelect = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.ModulationSelect);
             AppendModulationCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
             AppendModulationCommand.Subscribe(_ => AUTDHandler.Instance.AppendModulation());
 
-            SinFrequency = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.SinFrequency);
-            SinAmp = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.SinAmp);
-            SinOffset = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.SinOffset);
+            Static = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Static);
+            Sine = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Sine);
 
-            StaticDuty = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.StaticDuty);
+            Dictionary<string, Page> pageCache = new Dictionary<string, Page>();
+            Page = new ReactiveProperty<Page>(new SineView());
+
+            TransitPage = new ReactiveCommand<string>();
+            TransitPage.Subscribe(page =>
+            {
+                if (!pageCache.ContainsKey(page)) pageCache.Add(page, (Page)Activator.CreateInstance(null!, page)?.Unwrap()!);
+                Page.Value = pageCache[page]!;
+                AUTDSettings.Instance.ModulationSelect = (ModulationSelect)Enum.Parse(typeof(ModulationSelect), page.Split('.').LastOrDefault()?[..^4] ?? string.Empty);
+            });
         }
     }
 }

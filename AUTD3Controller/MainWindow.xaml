@@ -4,7 +4,7 @@ Project: AUTD3Controller
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 30/04/2021
+Last Modified: 06/05/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -120,11 +120,15 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     </ListViewItem>
                     <ListViewItem Padding="0">
                         <Grid>
-                            <materialDesign:PackIcon Kind="SineWave" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
-                            <TextBlock Text="Modulation" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="31*"/>
+                            </Grid.ColumnDefinitions>
+                            <materialDesign:PackIcon Kind="SineWave" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="4,0,0,0" Grid.ColumnSpan="2"/>
+                            <TextBlock Text="Modulation" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}" Grid.ColumnSpan="2"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation"
-                                    materialDesign:ButtonAssist.CornerRadius="0">
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.ModulationSelect"
+                                    materialDesign:ButtonAssist.CornerRadius="0" Grid.ColumnSpan="2">
                             </Button>
                         </Grid>
                     </ListViewItem>

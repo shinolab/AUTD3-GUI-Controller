@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 30/04/2021
+ * Last Modified: 06/05/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -106,8 +106,8 @@ namespace AUTD3Controller.Models
             var instance = AUTDSettings.Instance;
             var gain = instance.ModulationSelect switch
             {
-                ModulationSelect.Static => Modulation.StaticModulation(instance.StaticDuty),
-                ModulationSelect.Sine => Modulation.SineModulation(instance.SinFrequency, instance.SinAmp, instance.SinOffset),
+                ModulationSelect.Static => instance.Static.ToModulation(),
+                ModulationSelect.Sine => instance.Sine.ToModulation(),
                 _ => throw new ArgumentOutOfRangeException()
             };
             _autd.AppendModulationSync(gain);

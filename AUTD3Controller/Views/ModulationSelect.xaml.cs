@@ -1,8 +1,8 @@
 ﻿namespace AUTD3Controller.Views
 {
-    public partial class Modulation 
+    public partial class ModulationSelect
     {
-        public Modulation()
+        public ModulationSelect()
         {
             InitializeComponent();
         }
