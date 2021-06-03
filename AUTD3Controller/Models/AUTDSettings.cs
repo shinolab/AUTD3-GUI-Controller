@@ -110,7 +110,9 @@ namespace AUTD3Controller.Models
     public enum ModulationSelect
     {
         Sine,
-        Static
+        Static,
+        Saw,
+        Square
     }
 
     [DataContract]
@@ -150,6 +152,8 @@ namespace AUTD3Controller.Models
 
         [DataMember] public SineModulation Sine { get; set; } = new SineModulation(150, 1.0f, 0.5f);
         [DataMember] public StaticModulation Static { get; set; } = new StaticModulation(0xFF);
+        [DataMember] public SawModulation Saw { get; set; } = new SawModulation(150);
+        [DataMember] public SquareModulation Square { get; set; } = new SquareModulation(150, 0x00, 0xFF);
 
         [DataMember] public STM STM { get; set; } = new STM();
 

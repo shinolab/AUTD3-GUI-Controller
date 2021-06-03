@@ -4,7 +4,7 @@ Project: Views
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 06/05/2021
+Last Modified: 03/06/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -39,6 +39,10 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation.SineView"/>
             <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="Static" Margin="12 12 0 0"
                     Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation.StaticView"/>
+            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="Saw" Margin="12 12 0 0"
+                    Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation.SawView"/>
+            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="Square" Margin="12 12 0 0"
+                    Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation.SquareView"/>
         </WrapPanel>
         <Frame Grid.Row="2" Content="{Binding Page.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"/>
         <StackPanel Margin="0 0 0 0" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
