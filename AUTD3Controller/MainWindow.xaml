@@ -4,7 +4,7 @@ Project: AUTD3Controller
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 08/04/2021
+Last Modified: 06/05/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -111,19 +111,29 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     <ListViewItem Padding="0">
                         <Grid>
                             <materialDesign:PackIcon Kind="ContactlessPayment" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
-                            <TextBlock Text="Gain" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
+                            <TextBlock Text="GainSelect" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Gain"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.GainSelect"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>
                     </ListViewItem>
                     <ListViewItem Padding="0">
                         <Grid>
-                            <materialDesign:PackIcon Kind="SineWave" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="{StaticResource MenuIconMargin}"/>
+                            <materialDesign:PackIcon Kind="SineWave" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="4,0,0,0"/>
                             <TextBlock Text="Modulation" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
                             <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
-                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.ModulationSelect"
+                                    materialDesign:ButtonAssist.CornerRadius="0">
+                            </Button>
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Padding="0">
+                        <Grid>
+                            <materialDesign:PackIcon Kind="TimerOutline" Width="{StaticResource MenuIconSize}" Height="{StaticResource MenuIconSize}" VerticalAlignment="Center" Margin="4,0,0,0"/>
+                            <TextBlock Text="STM" VerticalAlignment="Center" Padding="{StaticResource MenuIconPadding}" FontSize="{StaticResource FontSize}"/>
+                            <Button Style="{StaticResource MaterialDesignRaisedButton}" HorizontalContentAlignment="Left" Width="{StaticResource MenuExpandWidth}" Height="{StaticResource MenuIconContainerSize}"
+                                    BorderBrush="{x:Null}" Background="{x:Null}"  Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.STM"
                                     materialDesign:ButtonAssist.CornerRadius="0">
                             </Button>
                         </Grid>

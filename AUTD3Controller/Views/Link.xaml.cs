@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace AUTD3Controller.Views
+﻿namespace AUTD3Controller.Views
 {
-    public partial class Link : Page
+    public partial class Link
     {
         public Link()
         {

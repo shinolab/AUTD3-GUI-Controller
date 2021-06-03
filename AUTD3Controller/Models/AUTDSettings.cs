@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 30/04/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -17,6 +17,7 @@ using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using AUTD3Controller.Helpers;
 using AUTD3Controller.Models.Gain;
+using AUTD3Controller.Models.Modulation;
 using AUTD3Sharp;
 using Reactive.Bindings;
 
@@ -28,17 +29,17 @@ namespace AUTD3Controller.Models
         [DataMember]
         public int No { get; set; }
         [DataMember]
-        public float X { get; set; }
+        public double X { get; set; }
         [DataMember]
-        public float Y { get; set; }
+        public double Y { get; set; }
         [DataMember]
-        public float Z { get; set; }
+        public double Z { get; set; }
         [DataMember]
-        public float RZ1 { get; set; }
+        public double RotateZ1 { get; set; }
         [DataMember]
-        public float RY { get; set; }
+        public double RotateY { get; set; }
         [DataMember]
-        public float RZ2 { get; set; }
+        public double RotateZ2 { get; set; }
 
         public GeometrySetting() { }
 
@@ -48,9 +49,9 @@ namespace AUTD3Controller.Models
             X = obj.X.Value;
             Y = obj.Y.Value;
             Z = obj.Z.Value;
-            RZ1 = obj.RZ1.Value;
-            RY = obj.RY.Value;
-            RZ2 = obj.RZ2.Value;
+            RotateZ1 = obj.RotateZ1.Value;
+            RotateY = obj.RotateY.Value;
+            RotateZ2 = obj.RotateZ2.Value;
         }
     }
 
@@ -61,46 +62,47 @@ namespace AUTD3Controller.Models
 #pragma warning restore 414
 
         public ReactiveProperty<int> No { get; }
-        public ReactiveProperty<float> X { get; }
-        public ReactiveProperty<float> Y { get; }
-        public ReactiveProperty<float> Z { get; }
-        public ReactiveProperty<float> RZ1 { get; }
-        public ReactiveProperty<float> RY { get; }
-        public ReactiveProperty<float> RZ2 { get; }
+        public ReactiveProperty<double> X { get; }
+        public ReactiveProperty<double> Y { get; }
+        public ReactiveProperty<double> Z { get; }
+        public ReactiveProperty<double> RotateZ1 { get; }
+        public ReactiveProperty<double> RotateY { get; }
+        public ReactiveProperty<double> RotateZ2 { get; }
 
         public GeometrySettingReactive(int id)
         {
             No = new ReactiveProperty<int>(id);
-            X = new ReactiveProperty<float>();
-            Y = new ReactiveProperty<float>();
-            Z = new ReactiveProperty<float>();
-            RZ1 = new ReactiveProperty<float>();
-            RY = new ReactiveProperty<float>();
-            RZ2 = new ReactiveProperty<float>();
+            X = new ReactiveProperty<double>();
+            Y = new ReactiveProperty<double>();
+            Z = new ReactiveProperty<double>();
+            RotateZ1 = new ReactiveProperty<double>();
+            RotateY = new ReactiveProperty<double>();
+            RotateZ2 = new ReactiveProperty<double>();
         }
 
         public GeometrySettingReactive(GeometrySetting obj)
         {
             No = new ReactiveProperty<int>(obj.No);
-            X = new ReactiveProperty<float>(obj.X);
-            Y = new ReactiveProperty<float>(obj.Y);
-            Z = new ReactiveProperty<float>(obj.Z);
-            RZ1 = new ReactiveProperty<float>(obj.RZ1);
-            RY = new ReactiveProperty<float>(obj.RY);
-            RZ2 = new ReactiveProperty<float>(obj.RZ2);
+            X = new ReactiveProperty<double>(obj.X);
+            Y = new ReactiveProperty<double>(obj.Y);
+            Z = new ReactiveProperty<double>(obj.Z);
+            RotateZ1 = new ReactiveProperty<double>(obj.RotateZ1);
+            RotateY = new ReactiveProperty<double>(obj.RotateY);
+            RotateZ2 = new ReactiveProperty<double>(obj.RotateZ2);
         }
     }
 
     public enum LinkSelect
     {
         SOEM,
-        LocalTwinCAT
+        TwinCAT
     }
 
     public enum GainSelect
     {
-        Focus,
-        Bessel,
+        FocalPoint,
+        BesselBeam,
+        Holo,
         PlaneWave,
         TransducerTest
     }
@@ -133,23 +135,23 @@ namespace AUTD3Controller.Models
         public string InterfaceName { get; set; }
 
         [DataMember]
+        public uint CycleTicks { get; set; } = 1;
+
+        [DataMember]
         public GainSelect GainSelect { get; set; }
         [DataMember]
         public ModulationSelect ModulationSelect { get; set; }
 
-        [DataMember] public FocalPoint Focus { get; set; } = new FocalPoint(90, 70, 150, 0xFF);
-        [DataMember] public BesselBeam Bessel { get; set; } = new BesselBeam(90, 70, 0, 0, 0, 1, AUTD.Pi / 10, 0xFF);
-        [DataMember] public PlaneWave PlaneWave { get; set; } = new PlaneWave(0, 0, 1, 0xFF);
+        [DataMember] public FocalPoint Focus { get; set; } = new FocalPoint(90, 70, 150);
+        [DataMember] public BesselBeam Bessel { get; set; } = new BesselBeam(90, 70, 0, 0, 0, 1, AUTD.Pi / 10);
+        [DataMember] public Holo Holo { get; set; } = new Holo();
+        [DataMember] public PlaneWave PlaneWave { get; set; } = new PlaneWave(0, 0, 1);
         [DataMember] public TransducerTest TransducerTest { get; set; } = new TransducerTest(0, 0xFF, 0);
 
-        [DataMember]
-        public int SinFrequency { get; set; } = 150;
-        [DataMember]
-        public float SinAmp { get; set; } = 1.0f;
-        [DataMember]
-        public float SinOffset { get; set; } = 0.5f;
-        [DataMember]
-        public byte StaticDuty { get; set; } = 0xFF;
+        [DataMember] public SineModulation Sine { get; set; } = new SineModulation(150, 1.0f, 0.5f);
+        [DataMember] public StaticModulation Static { get; set; } = new StaticModulation(0xFF);
+
+        [DataMember] public STM STM { get; set; } = new STM();
 
         private AUTDSettings()
         {

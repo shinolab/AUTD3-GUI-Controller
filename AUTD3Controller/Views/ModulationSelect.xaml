@@ -1,0 +1,50 @@
+﻿<!--
+File: Modulation.xaml
+Project: Views
+Created Date: 29/03/2021
+Author: Shun Suzuki
+=====
+Last Modified: 06/05/2021
+Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
+=====
+Copyright (c) 2021 Hapis Lab. All rights reserved.
+
+-->
+
+<Page x:Class="AUTD3Controller.Views.ModulationSelect"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:viewModels="clr-namespace:AUTD3Controller.ViewModels"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Modulation">
+
+    <Page.DataContext>
+        <viewModels:ModulationViewModel/>
+    </Page.DataContext>
+
+    <Grid Margin="12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Modulation" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
+        <WrapPanel Grid.Row="1" Margin="0 12 0 12">
+            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="Sine" Margin="0 12 0 0"
+                    Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation.SineView"/>
+            <Button Style="{StaticResource MaterialDesignRaisedDarkButton}"  Width="Auto" Content="Static" Margin="12 12 0 0"
+                    Command="{Binding TransitPage}" CommandParameter="AUTD3Controller.Views.Modulation.StaticView"/>
+        </WrapPanel>
+        <Frame Grid.Row="2" Content="{Binding Page.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"/>
+        <StackPanel Margin="0 0 0 0" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" BorderBrush="{x:Null}" Command="{Binding AppendModulationCommand}">
+                <materialDesign:PackIcon Kind="Add" Width="{StaticResource ActionButtonSize}" Height="{StaticResource ActionButtonSize}"/>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

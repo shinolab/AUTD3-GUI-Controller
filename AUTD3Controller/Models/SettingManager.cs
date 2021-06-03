@@ -4,7 +4,7 @@
  * Created Date: 07/04/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 06/05/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -12,8 +12,10 @@
  */
 
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using AUTD3Controller.Helpers;
+using AUTD3Controller.Models.Gain;
 
 namespace AUTD3Controller.Models
 {
@@ -27,34 +29,40 @@ namespace AUTD3Controller.Models
             public TotalSetting()
             {
                 General = General.Instance;
-                AUTDSettings = AUTDSettings.Instance; ;
+                AUTDSettings = AUTDSettings.Instance;
             }
         }
 
-        internal static void CopyGeometry()
-        {
-            AUTDSettings.Instance.Geometries = new GeometrySetting[AUTDSettings.Instance.GeometriesReactive.Count];
-            for (var i = 0; i < AUTDSettings.Instance.GeometriesReactive.Count; i++) {
-                AUTDSettings.Instance.Geometries[i] = new GeometrySetting(AUTDSettings.Instance.GeometriesReactive[i]);
-            }
-        }
-
+        internal static void CopyGeometry() => AUTDSettings.Instance.Geometries = AUTDSettings.Instance.GeometriesReactive.Select(g => new GeometrySetting(g)).ToArray();
+        internal static void CopyHoloSetting() => AUTDSettings.Instance.Holo.HoloSettings = AUTDSettings.Instance.Holo.HoloSettingsReactive.Select(s => new HoloSetting(s)).ToArray();
+        internal static void CopySTM() => AUTDSettings.Instance.STM.Points = AUTDSettings.Instance.STM.PointsReactive.Select(s => s.ToVector3()).ToArray();
         internal static void LoadGeometry()
         {
-            AUTDSettings.Instance.GeometriesReactive =
-                new ObservableCollectionWithItemNotify<GeometrySettingReactive>();
-
+            AUTDSettings.Instance.GeometriesReactive = new ObservableCollectionWithItemNotify<GeometrySettingReactive>();
             if (AUTDSettings.Instance.Geometries == null) return;
-
-            foreach (var geometry in AUTDSettings.Instance.Geometries)
-                AUTDSettings.Instance.GeometriesReactive.Add(new GeometrySettingReactive(geometry));
+            foreach (var geometry in AUTDSettings.Instance.Geometries) AUTDSettings.Instance.GeometriesReactive.Add(new GeometrySettingReactive(geometry));
+        }
+        internal static void LoadHoloSetting()
+        {
+            AUTDSettings.Instance.Holo.HoloSettingsReactive = new ObservableCollectionWithItemNotify<HoloSettingReactive>();
+            if (AUTDSettings.Instance.Holo.HoloSettings == null) return;
+            foreach (var s in AUTDSettings.Instance.Holo.HoloSettings) AUTDSettings.Instance.Holo.HoloSettingsReactive.Add(new HoloSettingReactive(s));
+        }
+        internal static void LoadSTM()
+        {
+            AUTDSettings.Instance.STM.PointsReactive = new ObservableCollectionWithItemNotify<Vector3Reactive>();
+            if (AUTDSettings.Instance.STM.Points == null) return;
+            foreach (var (s, i) in AUTDSettings.Instance.STM.Points.Select((s, i) => (s, i))) AUTDSettings.Instance.STM.PointsReactive.Add(new Vector3Reactive(i, s));
         }
 
         internal static void SaveSetting(string path)
         {
             CopyGeometry();
-            var options = new JsonSerializerOptions {
-                WriteIndented = true,
+            CopyHoloSetting();
+            CopySTM();
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true
             };
             var jsonString = JsonSerializer.Serialize(new TotalSetting(), options);
             File.WriteAllText(path, jsonString);
@@ -67,6 +75,8 @@ namespace AUTD3Controller.Models
             AUTDSettings.Instance = obj.AUTDSettings;
             General.Instance = obj.General;
             LoadGeometry();
+            LoadHoloSetting();
+            LoadSTM();
         }
     }
 }

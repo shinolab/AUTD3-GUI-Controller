@@ -4,7 +4,7 @@ Project: Views
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 07/04/2021
+Last Modified: 30/04/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -16,7 +16,6 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:AUTD3Controller.Views"
       xmlns:viewModels="clr-namespace:AUTD3Controller.ViewModels"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"

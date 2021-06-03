@@ -4,7 +4,7 @@ Project: Views
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 07/04/2021
+Last Modified: 03/06/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -60,6 +60,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             </StackPanel>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>
+                 <StackPanel>
                     <Grid Height="32">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -88,6 +89,18 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             <materialDesign:PackIcon Kind="Reload"/>
                         </Button>
                     </Grid>
+                     <StackPanel Orientation="Horizontal">
+                         <TextBlock
+                             Margin="8,0,0,0"
+                             VerticalAlignment="Center"
+                             Style="{StaticResource MaterialDesignTextBlock}"
+                             Foreground="{DynamicResource MaterialDesignDarkForeground}"
+                             Text="Cycle ticks: " />
+                         <TextBox Width="80" TextAlignment="Right" 
+                                  Text="{Binding CycleTicks.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        </StackPanel>
+                 </StackPanel>
                 </GroupBox>
                 <GroupBox Grid.Row="1" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" Margin="0 0 0 12">
                     <GroupBox.HeaderTemplate>
@@ -95,12 +108,12 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                             <StackPanel Orientation="Horizontal">
                                 <RadioButton 
                             Style="{DynamicResource MaterialDesignUserForegroundRadioButton}"                            
-                            IsChecked="{Binding DataContext.LinkSelected.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Enum}, ConverterParameter=LocalTwinCAT, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"/>
+                            IsChecked="{Binding DataContext.LinkSelected.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Enum}, ConverterParameter=TwinCAT, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"/>
                                 <TextBlock
                           Margin="8,0,0,0"
                           VerticalAlignment="Center"
                           Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                          Text="LocalTwinCATLink" />
+                          Text="TwinCATLink" />
                             </StackPanel>
                         </DataTemplate>
                     </GroupBox.HeaderTemplate>

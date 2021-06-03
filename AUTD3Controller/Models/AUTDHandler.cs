@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 30/04/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -45,7 +45,7 @@ namespace AUTD3Controller.Models
             _autd.ClearDevices();
             foreach (var item in AUTDSettings.Instance.GeometriesReactive)
             {
-                _autd.AddDevice(new Vector3f(item.X.Value, item.Y.Value, item.Z.Value), new Vector3f(item.RZ1.Value, item.RY.Value, item.RZ2.Value));
+                _autd.AddDevice(new Vector3d(item.X.Value, item.Y.Value, item.Z.Value), new Vector3d(item.RotateZ1.Value, item.RotateY.Value, item.RotateZ2.Value));
             }
         }
 
@@ -58,15 +58,15 @@ namespace AUTD3Controller.Models
                 var link = AUTDSettings.Instance.LinkSelected switch
                 {
                     LinkSelect.SOEM =>
-                        Link.SOEMLink(
+                        Link.SOEM(
                             AUTDSettings.Instance.InterfaceName.Split(',').LastOrDefault()?.Trim() ?? string.Empty,
-                            _autd.NumDevices),
-                    LinkSelect.LocalTwinCAT =>
-                        Link.LocalEtherCATLink(),
-                    _ => throw new NotImplementedException(),
+                            _autd.NumDevices, AUTDSettings.Instance.CycleTicks),
+                    LinkSelect.TwinCAT =>
+                        Link.TwinCAT(),
+                    _ => throw new NotImplementedException()
                 };
 
-                if (!_autd.OpenWith(link)) return AUTD.LastError;
+                if (!_autd.Open(link)) return AUTD.LastError;
 
                 IsOpen.Value = true;
                 _autd.Clear();
@@ -85,31 +85,42 @@ namespace AUTD3Controller.Models
             IsOpen.Value = false;
         }
 
-        public void AppendGain()
+        public bool SendGain()
         {
             var instance = AUTDSettings.Instance;
             var gain = instance.GainSelect switch
             {
-                GainSelect.Focus => instance.Focus.ToGain(),
-                GainSelect.Bessel => instance.Bessel.ToGain(),
+                GainSelect.FocalPoint => instance.Focus.ToGain(),
+                GainSelect.BesselBeam => instance.Bessel.ToGain(),
+                GainSelect.Holo => instance.Holo.ToGain(),
                 GainSelect.PlaneWave => instance.PlaneWave.ToGain(),
                 GainSelect.TransducerTest => instance.TransducerTest.ToGain(),
                 _ => throw new ArgumentOutOfRangeException()
             };
-            _autd.AppendGainSync(gain);
-            IsRunning.Value = true;
+            var res = _autd.Send(gain);
+            IsRunning.Value = res;
+            return res;
         }
 
-        public void AppendModulation()
+        public bool SendModulation()
         {
             var instance = AUTDSettings.Instance;
             var gain = instance.ModulationSelect switch
             {
-                ModulationSelect.Static => Modulation.StaticModulation(instance.StaticDuty),
-                ModulationSelect.Sine => Modulation.SineModulation(instance.SinFrequency, instance.SinAmp, instance.SinOffset),
+                ModulationSelect.Static => instance.Static.ToModulation(),
+                ModulationSelect.Sine => instance.Sine.ToModulation(),
                 _ => throw new ArgumentOutOfRangeException()
             };
-            _autd.AppendModulationSync(gain);
+            return _autd.Send(gain);
+        }
+
+        public bool SendSeq()
+        {
+            var instance = AUTDSettings.Instance;
+            var seq = instance.STM.ToPointSequence();
+            var res = _autd.Send(seq);
+            IsRunning.Value = res;
+            return res;
         }
 
         public void Stop()
