@@ -12,7 +12,6 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using AUTD3Controller.Helpers;
@@ -55,12 +54,8 @@ namespace AUTD3Controller.Models
         }
     }
 
-    public class GeometrySettingReactive : INotifyPropertyChanged
+    public class GeometrySettingReactive : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
-
         public ReactiveProperty<int> No { get; }
         public ReactiveProperty<double> X { get; }
         public ReactiveProperty<double> Y { get; }
@@ -110,18 +105,16 @@ namespace AUTD3Controller.Models
     public enum ModulationSelect
     {
         Sine,
-        Static
+        Static,
+        Saw,
+        Square
     }
 
     [DataContract]
-    public class AUTDSettings : INotifyPropertyChanged
+    public class AUTDSettings : ReactivePropertyBase
     {
         private static Lazy<AUTDSettings> _lazy = new Lazy<AUTDSettings>(() => new AUTDSettings());
         public static AUTDSettings Instance { get => _lazy.Value; set => _lazy = new Lazy<AUTDSettings>(() => value); }
-
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
 
         [JsonIgnore]
         public ObservableCollectionWithItemNotify<GeometrySettingReactive> GeometriesReactive { get; internal set; }
@@ -137,6 +130,9 @@ namespace AUTD3Controller.Models
         [DataMember]
         public uint CycleTicks { get; set; } = 1;
 
+        [DataMember] public ushort ModFrequencyDivision { get; set; } = 10;
+        [DataMember] public ushort ModBufSize { get; set; } = 4000;
+
         [DataMember]
         public GainSelect GainSelect { get; set; }
         [DataMember]
@@ -150,8 +146,10 @@ namespace AUTD3Controller.Models
 
         [DataMember] public SineModulation Sine { get; set; } = new SineModulation(150, 1.0f, 0.5f);
         [DataMember] public StaticModulation Static { get; set; } = new StaticModulation(0xFF);
+        [DataMember] public SawModulation Saw { get; set; } = new SawModulation(150);
+        [DataMember] public SquareModulation Square { get; set; } = new SquareModulation(150, 0x00, 0xFF);
 
-        [DataMember] public STM STM { get; set; } = new STM();
+        [DataMember] public Seq Seq { get; set; } = new Seq();
 
         private AUTDSettings()
         {

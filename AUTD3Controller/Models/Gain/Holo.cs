@@ -12,7 +12,6 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.Linq;
 using System.Text.Json.Serialization;
 using AUTD3Controller.Helpers;
@@ -54,11 +53,9 @@ namespace AUTD3Controller.Models.Gain
         public double Tau { get; set; } = 1e-3f;
     }
 
-    public class HoloSettingReactive : INotifyPropertyChanged
+    public class HoloSettingReactive : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
+
 
         public ReactiveProperty<int> No { get; }
         public ReactiveProperty<double> X { get; }

@@ -15,12 +15,4 @@
     <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
     <PackageReference Include="ReactiveProperty" Version="7.11.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Domain\ConfirmDialog.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-  </ItemGroup>
-
 </Project>

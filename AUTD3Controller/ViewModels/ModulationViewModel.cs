@@ -13,10 +13,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Windows.Controls;
+using AUTD3Controller.Helpers;
 using AUTD3Controller.Models;
 using AUTD3Controller.Models.Modulation;
 using AUTD3Controller.Views.Modulation;
@@ -25,13 +25,9 @@ using Reactive.Bindings.Extensions;
 
 namespace AUTD3Controller.ViewModels
 {
-    internal class ModulationViewModel : INotifyPropertyChanged
+    internal class ModulationViewModel : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
-
-        public ReactiveCommand AppendModulationCommand { get; }
+        public ReactiveCommand SendModulationCommand { get; }
 
         public ReactiveProperty<Page> Page { get; }
         public ReactiveCommand<string> TransitPage { get; }
@@ -42,8 +38,8 @@ namespace AUTD3Controller.ViewModels
 
         public ModulationViewModel()
         {
-            AppendModulationCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
-            AppendModulationCommand.Subscribe(_ => AUTDHandler.Instance.SendModulation());
+            SendModulationCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
+            SendModulationCommand.Subscribe(_ => AUTDHandler.Instance.SendModulation());
 
             Static = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Static);
             Sine = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Sine);

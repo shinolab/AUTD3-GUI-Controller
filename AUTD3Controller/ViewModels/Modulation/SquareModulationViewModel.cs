@@ -1,7 +1,7 @@
 ﻿/*
- * File: SineModulationViewModel.cs
+ * File: SquareModulationViewModel.cs
  * Project: Modulation
- * Created Date: 06/05/2021
+ * Created Date: 03/06/2021
  * Author: Shun Suzuki
  * -----
  * Last Modified: 03/06/2021
@@ -19,15 +19,15 @@ using Reactive.Bindings.Extensions;
 
 namespace AUTD3Controller.ViewModels.Modulation
 {
-    public class SineModulationViewModel : ReactivePropertyBase
+    public class SquareModulationViewModel : ReactivePropertyBase
     {
 
 
-        public ReactiveProperty<SineModulation> Sine { get; }
+        public ReactiveProperty<SquareModulation> Square { get; }
 
-        public SineModulationViewModel()
+        public SquareModulationViewModel()
         {
-            Sine = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Sine);
+            Square = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Square);
         }
     }
 }

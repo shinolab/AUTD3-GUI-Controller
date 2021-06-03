@@ -11,17 +11,12 @@
  * 
  */
 
-using System.ComponentModel;
 using Reactive.Bindings;
 
 namespace AUTD3Controller.Helpers
 {
-    public class Vector3Reactive : INotifyPropertyChanged
+    public class Vector3Reactive : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
-
         public ReactiveProperty<int> No { get; }
         public ReactiveProperty<double> X { get; }
         public ReactiveProperty<double> Y { get; }
