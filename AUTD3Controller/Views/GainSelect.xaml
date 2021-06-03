@@ -48,7 +48,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
         </WrapPanel>
         <Frame Grid.Row="2" Content="{Binding Page.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"/>
         <StackPanel Margin="0 0 0 0" Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" BorderBrush="{x:Null}" Command="{Binding AppendGainCommand}">
+            <Button Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="{StaticResource ActionButtonContainerSize}" Height="{StaticResource ActionButtonContainerSize}" Padding="0" BorderBrush="{x:Null}" Command="{Binding SendGainCommand}">
                 <materialDesign:PackIcon Kind="Add" Width="{StaticResource ActionButtonSize}" Height="{StaticResource ActionButtonSize}"/>
             </Button>
         </StackPanel>

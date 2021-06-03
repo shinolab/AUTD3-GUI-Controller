@@ -1,8 +1,8 @@
 ﻿namespace AUTD3Controller.Views
 {
-    public partial class STM
+    public partial class Seq
     {
-        public STM()
+        public Seq()
         {
             InitializeComponent();
         }

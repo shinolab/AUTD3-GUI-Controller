@@ -13,10 +13,10 @@
 
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using AUTD3Controller.Domain;
+using AUTD3Controller.Helpers;
 using AUTD3Controller.Models;
 using AUTD3Sharp;
 using MaterialDesignThemes.Wpf;
@@ -25,11 +25,9 @@ using Reactive.Bindings.Extensions;
 
 namespace AUTD3Controller.ViewModels
 {
-    internal class LinkViewModel : INotifyPropertyChanged
+    internal class LinkViewModel : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
+
 
         public ObservableCollection<string> Interfaces { get; }
         public ReactiveProperty<string> InterfaceName { get; }

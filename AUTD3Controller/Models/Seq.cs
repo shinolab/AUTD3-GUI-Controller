@@ -1,5 +1,5 @@
 ﻿/*
- * File: STM.cs
+ * File: Seq.cs
  * Project: Models
  * Created Date: 06/05/2021
  * Author: Shun Suzuki
@@ -19,7 +19,7 @@ using AUTD3Sharp.Utils;
 
 namespace AUTD3Controller.Models
 {
-    public class STM
+    public class Seq
     {
         [JsonIgnore]
         public ObservableCollectionWithItemNotify<Vector3Reactive> PointsReactive { get; internal set; }
@@ -28,7 +28,7 @@ namespace AUTD3Controller.Models
 
         public double Frequency { get; set; }
 
-        public STM()
+        public Seq()
         {
             PointsReactive = new ObservableCollectionWithItemNotify<Vector3Reactive>();
             Points = null;

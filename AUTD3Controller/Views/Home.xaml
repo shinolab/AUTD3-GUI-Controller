@@ -4,7 +4,7 @@ Project: Views
 Created Date: 29/03/2021
 Author: Shun Suzuki
 =====
-Last Modified: 30/04/2021
+Last Modified: 03/06/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -33,16 +33,16 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
         <TextBlock Text="Home" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
         <StackPanel Grid.Row="1">
             <TextBlock Margin="0 12 0 0" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource FontSize}">
-                • First, append devices in Geometry
+                • First, add devices in Geometry Page
             </TextBlock>
             <TextBlock Margin="0 12 0 0" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource FontSize}">
-                • Second, select link and open in Link
+                • Second, select link and open in Link Select Page
             </TextBlock>
             <TextBlock Margin="0 12 0 0" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource FontSize}">
-                • Then, select gain and append it in Gain
+                • Then, select gain and send it in Gain Select Page
             </TextBlock>
             <TextBlock Margin="0 12 0 0" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource FontSize}">
-                • Or, select modulation and append it in Modulation
+                • Or, select modulation and send it in Modulation Select Page
             </TextBlock>
         </StackPanel>
     </Grid>

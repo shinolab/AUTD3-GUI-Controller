@@ -13,7 +13,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
@@ -21,6 +20,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using AUTD3Controller.Domain;
+using AUTD3Controller.Helpers;
 using AUTD3Controller.Models;
 using AUTD3Controller.Views;
 using MaterialDesignExtensions.Controls;
@@ -55,20 +55,16 @@ namespace AUTD3Controller
         }
     }
 
-    public class MainWindowModel : INotifyPropertyChanged
+    public class MainWindowModel : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
+
 
         public Page Page { get; set; } = new Home();
     }
 
-    public class MainWindowViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
+
 
         public ReactiveProperty<Page> Page { get; }
 

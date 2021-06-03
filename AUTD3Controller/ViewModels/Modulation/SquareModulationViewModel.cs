@@ -11,7 +11,7 @@
  * 
  */
 
-using System.ComponentModel;
+using AUTD3Controller.Helpers;
 using AUTD3Controller.Models;
 using AUTD3Controller.Models.Modulation;
 using Reactive.Bindings;
@@ -19,11 +19,9 @@ using Reactive.Bindings.Extensions;
 
 namespace AUTD3Controller.ViewModels.Modulation
 {
-    public class SquareModulationViewModel : INotifyPropertyChanged
+    public class SquareModulationViewModel : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
+
 
         public ReactiveProperty<SquareModulation> Square { get; }
 

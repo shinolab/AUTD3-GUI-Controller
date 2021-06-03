@@ -12,7 +12,6 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.Runtime.Serialization;
 using System.Text.Json.Serialization;
 using AUTD3Controller.Helpers;
@@ -55,11 +54,9 @@ namespace AUTD3Controller.Models
         }
     }
 
-    public class GeometrySettingReactive : INotifyPropertyChanged
+    public class GeometrySettingReactive : ReactivePropertyBase
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
+
 
         public ReactiveProperty<int> No { get; }
         public ReactiveProperty<double> X { get; }
@@ -116,14 +113,10 @@ namespace AUTD3Controller.Models
     }
 
     [DataContract]
-    public class AUTDSettings : INotifyPropertyChanged
+    public class AUTDSettings : ReactivePropertyBase
     {
         private static Lazy<AUTDSettings> _lazy = new Lazy<AUTDSettings>(() => new AUTDSettings());
         public static AUTDSettings Instance { get => _lazy.Value; set => _lazy = new Lazy<AUTDSettings>(() => value); }
-
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
 
         [JsonIgnore]
         public ObservableCollectionWithItemNotify<GeometrySettingReactive> GeometriesReactive { get; internal set; }
@@ -155,7 +148,7 @@ namespace AUTD3Controller.Models
         [DataMember] public SawModulation Saw { get; set; } = new SawModulation(150);
         [DataMember] public SquareModulation Square { get; set; } = new SquareModulation(150, 0x00, 0xFF);
 
-        [DataMember] public STM STM { get; set; } = new STM();
+        [DataMember] public Seq Seq { get; set; } = new Seq();
 
         private AUTDSettings()
         {

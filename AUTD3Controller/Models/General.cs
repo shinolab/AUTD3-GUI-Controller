@@ -12,7 +12,7 @@
  */
 
 using System;
-using System.ComponentModel;
+using AUTD3Controller.Helpers;
 
 namespace AUTD3Controller.Models
 {
@@ -22,14 +22,12 @@ namespace AUTD3Controller.Models
         Degree
     }
 
-    public class General : INotifyPropertyChanged
+    public class General : ReactivePropertyBase
     {
         private static Lazy<General> _lazy = new Lazy<General>(() => new General());
         public static General Instance { get => _lazy.Value; set => _lazy = new Lazy<General>(() => value); }
 
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
+
 
         public AngleUnit AngleUnit { get; set; }
 

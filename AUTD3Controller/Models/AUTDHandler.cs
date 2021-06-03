@@ -12,22 +12,18 @@
  */
 
 using System;
-using System.ComponentModel;
 using System.Linq;
+using AUTD3Controller.Helpers;
 using AUTD3Sharp;
 using AUTD3Sharp.Utils;
 using Reactive.Bindings;
 
 namespace AUTD3Controller.Models
 {
-    internal class AUTDHandler : INotifyPropertyChanged, IDisposable
+    internal class AUTDHandler : ReactivePropertyBase, IDisposable
     {
         private static readonly Lazy<AUTDHandler> Lazy = new Lazy<AUTDHandler>(() => new AUTDHandler());
         public static AUTDHandler Instance => Lazy.Value;
-
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
 
         private readonly AUTD _autd;
         public ReactiveProperty<bool> IsOpen { get; }
@@ -109,6 +105,8 @@ namespace AUTD3Controller.Models
             {
                 ModulationSelect.Static => instance.Static.ToModulation(),
                 ModulationSelect.Sine => instance.Sine.ToModulation(),
+                ModulationSelect.Saw => instance.Saw.ToModulation(),
+                ModulationSelect.Square => instance.Square.ToModulation(),
                 _ => throw new ArgumentOutOfRangeException()
             };
             return _autd.Send(gain);
@@ -117,7 +115,7 @@ namespace AUTD3Controller.Models
         public bool SendSeq()
         {
             var instance = AUTDSettings.Instance;
-            var seq = instance.STM.ToPointSequence();
+            var seq = instance.Seq.ToPointSequence();
             var res = _autd.Send(seq);
             IsRunning.Value = res;
             return res;

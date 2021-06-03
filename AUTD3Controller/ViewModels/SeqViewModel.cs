@@ -1,5 +1,5 @@
 ﻿/*
- * File: STMViewModel.cs
+ * File: SeqViewModel.cs
  * Project: ViewModels
  * Created Date: 06/05/2021
  * Author: Shun Suzuki
@@ -28,13 +28,9 @@ using Reactive.Bindings.Extensions;
 
 namespace AUTD3Controller.ViewModels
 {
-    class STMViewModel : INotifyPropertyChanged, IDropTarget
+    internal class SeqViewModel : ReactivePropertyBase, IDropTarget
     {
-#pragma warning disable 414
-        public event PropertyChangedEventHandler PropertyChanged = null!;
-#pragma warning restore 414
-
-        public ReactiveProperty<STM> STM { get; }
+        public ReactiveProperty<Seq> Seq { get; }
 
         public ObservableCollectionWithItemNotify<Vector3Reactive> Points { get; }
         public ReactiveProperty<Vector3Reactive?> Current { get; }
@@ -44,15 +40,15 @@ namespace AUTD3Controller.ViewModels
         public ReactiveCommand UpItem { get; }
         public ReactiveCommand DownItem { get; }
 
-        public ReactiveCommand AppendSTMCommand { get; }
+        public ReactiveCommand SendSeqCommand { get; }
 
-        public STMViewModel()
+        public SeqViewModel()
         {
-            STM = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.STM);
-            Points = AUTDSettings.Instance.STM.PointsReactive;
+            Seq = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Seq);
+            Points = AUTDSettings.Instance.Seq.PointsReactive;
 
-            AppendSTMCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
-            AppendSTMCommand.Subscribe(_ =>
+            SendSeqCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
+            SendSeqCommand.Subscribe(_ =>
             {
                 if (Points.Count == 0) return;
                 AUTDHandler.Instance.SendSeq();
