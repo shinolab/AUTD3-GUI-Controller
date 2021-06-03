@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -35,6 +35,8 @@ namespace AUTD3Controller.ViewModels
         public ReactiveProperty<string> InterfaceName { get; }
         public ReactiveProperty<LinkSelect> LinkSelected { get; }
 
+        public ReactiveProperty<uint> CycleTicks { get; set; }
+
         public AsyncReactiveCommand UpdateInterfaces { get; }
         public AsyncReactiveCommand Open { get; }
         public ReactiveCommand Close { get; }
@@ -44,24 +46,31 @@ namespace AUTD3Controller.ViewModels
             Interfaces = new ObservableCollection<string>();
 
             LinkSelected = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.LinkSelected);
+            CycleTicks = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.CycleTicks);
 
-            try {
+            try
+            {
                 UpdateInterfacesList();
             }
-            catch (DllNotFoundException) {
-                LinkSelected.Value = LinkSelect.LocalTwinCAT;
+            catch (DllNotFoundException)
+            {
+                LinkSelected.Value = LinkSelect.TwinCAT;
             }
 
             InterfaceName = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.InterfaceName);
 
             UpdateInterfaces = LinkSelected.Select(s => s == LinkSelect.SOEM).ToAsyncReactiveCommand();
-            UpdateInterfaces.Subscribe(async _ => {
-                try {
+            UpdateInterfaces.Subscribe(async _ =>
+            {
+                try
+                {
                     UpdateInterfacesList();
                 }
-                catch (DllNotFoundException e) {
+                catch (DllNotFoundException e)
+                {
                     var vm = new ErrorDialogViewModel { Message = { Value = $"{e.Message}.\nDid you install npcap or wpcap?" } };
-                    var dialog = new ErrorDialog {
+                    var dialog = new ErrorDialog
+                    {
                         DataContext = vm
                     };
                     await DialogHost.Show(dialog, "MessageDialogHost");
@@ -69,17 +78,20 @@ namespace AUTD3Controller.ViewModels
             });
 
             Close = AUTDHandler.Instance.IsOpen.Select(i => i).ToReactiveCommand();
-            Close.Subscribe(_ => {
+            Close.Subscribe(_ =>
+            {
                 AUTDHandler.Instance.Close();
             });
             Open = AUTDHandler.Instance.IsOpen.Select(i => !i).ToAsyncReactiveCommand();
-            Open.Subscribe(async _ => {
+            Open.Subscribe(async _ =>
+            {
                 var res = await Task.Run(() => AUTDHandler.Instance.Open());
 
                 if (res == null) return;
 
                 var vm = new ErrorDialogViewModel { Message = { Value = $"Failed to Open AUTD. {res}" } };
-                var dialog = new ErrorDialog {
+                var dialog = new ErrorDialog
+                {
                     DataContext = vm
                 };
                 await DialogHost.Show(dialog, "MessageDialogHost");

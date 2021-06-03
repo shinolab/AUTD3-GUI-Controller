@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 30/04/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -198,8 +198,8 @@ namespace AUTD3Controller
                     }
                 }
 
-                AUTDHandler.Instance.AppendGain();
-                AUTDHandler.Instance.AppendModulation();
+                AUTDHandler.Instance.SendGain();
+                AUTDHandler.Instance.SendModulation();
 
             });
             Stop = AUTDHandler.Instance.IsRunning.Select(x => x).ToReactiveCommand();

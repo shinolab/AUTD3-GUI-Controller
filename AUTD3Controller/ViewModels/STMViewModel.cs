@@ -4,7 +4,7 @@
  * Created Date: 06/05/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 06/05/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -55,7 +55,7 @@ namespace AUTD3Controller.ViewModels
             AppendSTMCommand.Subscribe(_ =>
             {
                 if (Points.Count == 0) return;
-                AUTDHandler.Instance.AppendSTM();
+                AUTDHandler.Instance.SendSeq();
             });
 
             Current = new ReactiveProperty<Vector3Reactive?>();

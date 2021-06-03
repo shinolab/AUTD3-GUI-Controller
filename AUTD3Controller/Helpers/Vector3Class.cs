@@ -4,7 +4,7 @@
  * Created Date: 06/05/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 06/05/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -15,9 +15,9 @@ namespace AUTD3Controller.Helpers
 {
     public class Vector3Class
     {
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Z { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
 
         public Vector3Class()
         {
@@ -26,7 +26,7 @@ namespace AUTD3Controller.Helpers
             Z = 0;
         }
 
-        public Vector3Class(float x, float y, float z)
+        public Vector3Class(double x, double y, double z)
         {
             X = x;
             Y = y;

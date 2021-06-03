@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 30/04/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -46,7 +46,7 @@ namespace AUTD3Controller.ViewModels
             AppendGainCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
             AppendGainCommand.Subscribe(_ =>
             {
-                AUTDHandler.Instance.AppendGain();
+                AUTDHandler.Instance.SendGain();
             });
 
             Bessel = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Bessel);

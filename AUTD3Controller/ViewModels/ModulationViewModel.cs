@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 06/05/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -43,7 +43,7 @@ namespace AUTD3Controller.ViewModels
         public ModulationViewModel()
         {
             AppendModulationCommand = AUTDHandler.Instance.IsOpen.Select(b => b).ToReactiveCommand();
-            AppendModulationCommand.Subscribe(_ => AUTDHandler.Instance.AppendModulation());
+            AppendModulationCommand.Subscribe(_ => AUTDHandler.Instance.SendModulation());
 
             Static = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Static);
             Sine = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Sine);

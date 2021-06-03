@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/04/2021
+ * Last Modified: 03/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -23,15 +23,17 @@ namespace AUTD3Controller.Converter
 
         public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (!(value is float v)) return null;
+            if (!(value is double v)) return null;
 
             if (string.IsNullOrEmpty(_currentString)) return v.ToString(culture);
 
             string format;
-            if (_currentString.EndsWith(culture.NumberFormat.NumberDecimalSeparator)) {
+            if (_currentString.EndsWith(culture.NumberFormat.NumberDecimalSeparator))
+            {
                 format = @$"{new string('0', _currentString.Length - 1)}\{culture.NumberFormat.NumberDecimalSeparator}";
             }
-            else {
+            else
+            {
                 var pos = _currentString.IndexOf(culture.NumberFormat.NumberDecimalSeparator, StringComparison.Ordinal);
                 if (pos < 0) return v.ToString(culture);
                 var digitLength = _currentString.Length - pos - 1;
@@ -43,7 +45,7 @@ namespace AUTD3Controller.Converter
         public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             _currentString = value as string;
-            if (!string.IsNullOrEmpty(_currentString) && float.TryParse(_currentString, out var v)) return v;
+            if (!string.IsNullOrEmpty(_currentString) && double.TryParse(_currentString, out var v)) return v;
             return null;
         }
     }

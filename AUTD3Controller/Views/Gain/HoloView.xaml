@@ -4,7 +4,7 @@ Project: Gain
 Created Date: 30/04/2021
 Author: Shun Suzuki
 =====
-Last Modified: 30/04/2021
+Last Modified: 03/06/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -241,6 +241,22 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                             <TextBox Grid.Row="3" Grid.Column="1" Width="80" TextAlignment="Right" 
                                      Text="{Binding Holo.Value.NLSParams.Tau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}" 
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Visibility="{Binding Holo.Value.OptMethod, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource EnumToVisibility}, ConverterParameter=Greedy}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="phase div: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding Holo.Value.GreedyPhaseDiv, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                         </Grid>
                     </Grid>
