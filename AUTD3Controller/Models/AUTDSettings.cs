@@ -56,8 +56,6 @@ namespace AUTD3Controller.Models
 
     public class GeometrySettingReactive : ReactivePropertyBase
     {
-
-
         public ReactiveProperty<int> No { get; }
         public ReactiveProperty<double> X { get; }
         public ReactiveProperty<double> Y { get; }
@@ -131,6 +129,9 @@ namespace AUTD3Controller.Models
 
         [DataMember]
         public uint CycleTicks { get; set; } = 1;
+
+        [DataMember] public ushort ModFrequencyDivision { get; set; } = 10;
+        [DataMember] public ushort ModBufSize { get; set; } = 4000;
 
         [DataMember]
         public GainSelect GainSelect { get; set; }

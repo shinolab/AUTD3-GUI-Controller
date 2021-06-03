@@ -66,7 +66,7 @@ namespace AUTD3Controller.Models
 
                 IsOpen.Value = true;
                 _autd.Clear();
-                _autd.Synchronize();
+                _autd.Synchronize(AUTDSettings.Instance.ModFrequencyDivision, AUTDSettings.Instance.ModBufSize);
                 return null;
             }
             catch (Exception e)

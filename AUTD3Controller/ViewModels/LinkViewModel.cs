@@ -27,13 +27,13 @@ namespace AUTD3Controller.ViewModels
 {
     internal class LinkViewModel : ReactivePropertyBase
     {
-
-
         public ObservableCollection<string> Interfaces { get; }
         public ReactiveProperty<string> InterfaceName { get; }
         public ReactiveProperty<LinkSelect> LinkSelected { get; }
 
-        public ReactiveProperty<uint> CycleTicks { get; set; }
+        public ReactiveProperty<uint> CycleTicks { get; }
+        public ReactiveProperty<ushort> ModFrequencyDivision { get; }
+        public ReactiveProperty<ushort> ModBufSize { get; }
 
         public AsyncReactiveCommand UpdateInterfaces { get; }
         public AsyncReactiveCommand Open { get; }
@@ -45,6 +45,8 @@ namespace AUTD3Controller.ViewModels
 
             LinkSelected = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.LinkSelected);
             CycleTicks = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.CycleTicks);
+            ModFrequencyDivision = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.ModFrequencyDivision);
+            ModBufSize = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.ModBufSize);
 
             try
             {

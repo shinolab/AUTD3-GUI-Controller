@@ -37,36 +37,38 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Text="Link" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
-            <Grid Grid.Row="1" Margin="0 12 0 0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto" />
-                </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" Margin="0 0 0 12">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <RadioButton
+            <ScrollViewer Grid.Row="1" Margin="0 12 0 0" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" Margin="0 0 0 12">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton
                             Style="{DynamicResource MaterialDesignUserForegroundRadioButton}"                            
                             IsChecked="{Binding DataContext.LinkSelected.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Enum}, ConverterParameter=SOEM, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"/>
-                                <TextBlock
+                                    <TextBlock
                           Margin="8,0,0,0"
                           VerticalAlignment="Center"
                           Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                          Text="SOEMLink" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                 <StackPanel>
-                    <Grid Height="32">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <ComboBox Grid.Column="0"
+                          Text="SOEM" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <StackPanel>
+                            <Grid Height="32">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ComboBox Grid.Column="0"
                     FontSize="16"
                     IsEditable="True"
                     ItemsSource="{Binding Interfaces}"
@@ -76,50 +78,87 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     Style="{StaticResource MaterialDesignComboBox}"
                     Foreground="{DynamicResource MaterialDesignDarkForeground}"
                     IsEnabled="{Binding DataContext.LinkSelected.Value, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Enum}, ConverterParameter=SOEM, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}">
-                            <ComboBox.Text>
-                                <Binding Path="InterfaceName.Value" UpdateSourceTrigger="PropertyChanged">
-                                    <Binding.ValidationRules>
-                                        <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
-                                    </Binding.ValidationRules>
-                                </Binding>
-                            </ComboBox.Text>
-                        </ComboBox>
-                        <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="32" Height="32" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}"
+                                    <ComboBox.Text>
+                                        <Binding Path="InterfaceName.Value" UpdateSourceTrigger="PropertyChanged">
+                                            <Binding.ValidationRules>
+                                                <domain:NotEmptyValidationRule ValidatesOnTargetUpdated="True"/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </ComboBox.Text>
+                                </ComboBox>
+                                <Button Grid.Column="1" Style="{StaticResource MaterialDesignFloatingActionDarkButton}" Width="32" Height="32" Padding="0" BorderBrush="{x:Null}" Background="{x:Null}"
                         Command="{Binding UpdateInterfaces}">
-                            <materialDesign:PackIcon Kind="Reload"/>
-                        </Button>
-                    </Grid>
-                     <StackPanel Orientation="Horizontal">
-                         <TextBlock
+                                    <materialDesign:PackIcon Kind="Reload"/>
+                                </Button>
+                            </Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock
                              Margin="8,0,0,0"
                              VerticalAlignment="Center"
                              Style="{StaticResource MaterialDesignTextBlock}"
                              Foreground="{DynamicResource MaterialDesignDarkForeground}"
                              Text="Cycle ticks: " />
-                         <TextBox Width="80" TextAlignment="Right" 
+                                <TextBox Width="80" TextAlignment="Right" 
                                   Text="{Binding CycleTicks.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                   Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            </StackPanel>
                         </StackPanel>
-                 </StackPanel>
-                </GroupBox>
-                <GroupBox Grid.Row="1" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" Margin="0 0 0 12">
-                    <GroupBox.HeaderTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <RadioButton 
+                    </GroupBox>
+                    <GroupBox Grid.Row="1" Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" Margin="0 0 0 12">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <RadioButton 
                             Style="{DynamicResource MaterialDesignUserForegroundRadioButton}"                            
                             IsChecked="{Binding DataContext.LinkSelected.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource Enum}, ConverterParameter=TwinCAT, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"/>
-                                <TextBlock
+                                    <TextBlock
                           Margin="8,0,0,0"
                           VerticalAlignment="Center"
                           Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                          Text="TwinCATLink" />
-                            </StackPanel>
-                        </DataTemplate>
-                    </GroupBox.HeaderTemplate>
-                </GroupBox>
-            </Grid>
-            <Grid Grid.Row="2" HorizontalAlignment="Right">
+                          Text="TwinCAT" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                    </GroupBox>
+                </Grid>
+            </ScrollViewer>
+            <ScrollViewer Grid.Row="2" Margin="0 12 0 0" VerticalScrollBarVisibility="Auto">
+                <WrapPanel>
+                    <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" 
+                              Margin="0 12 0 0">
+                        <GroupBox.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                        FontSize="{StaticResource HeaderFontSize}"
+                                        VerticalAlignment="Center"
+                                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
+                                        Text="Property" />
+                            </DataTemplate>
+                        </GroupBox.HeaderTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="modulation frequency division: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                   Text="{Binding ModFrequencyDivision.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                   Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="modulation buffer size: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding ModBufSize.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                </WrapPanel>
+            </ScrollViewer>
+            <Grid Grid.Row="3" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
