@@ -1,30 +1,35 @@
 ﻿<!--
-File: SawView.xaml
+File: SinePressureView.xaml
 Project: Modulation
-Created Date: 03/06/2021
+Created Date: 05/06/2021
 Author: Shun Suzuki
 =====
-Last Modified: 03/06/2021
+Last Modified: 05/06/2021
 Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
 =====
 Copyright (c) 2021 Hapis Lab. All rights reserved.
 
 -->
 
-<Page x:Class="AUTD3Controller.Views.Modulation.SawView"
+<Page x:Class="AUTD3Controller.Views.Modulation.SinePressureView"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:modulation="clr-namespace:AUTD3Controller.ViewModels.Modulation"
+      xmlns:converter="clr-namespace:AUTD3Controller.Converter"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SawView">
+      Title="SinePressureView">
 
     <Page.DataContext>
-        <modulation:SawModulationViewModel/>
+        <modulation:SinePressureModulationViewModel/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <converter:FloatToStringConverter x:Key="FloatConverter"/>
+    </Page.Resources>
 
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -43,15 +48,25 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="frequency: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="amp: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="offset: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                         <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding Saw.Value.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Text="{Binding SinePressure.Value.Frequency, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding SinePressure.Value.Amp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
+                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
+                        <TextBox Grid.Row="2" Grid.Column="1" Width="80" TextAlignment="Right" 
+                                     Text="{Binding SinePressure.Value.Offset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource FloatConverter}}"
                                      Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
                     </Grid>
                 </GroupBox>

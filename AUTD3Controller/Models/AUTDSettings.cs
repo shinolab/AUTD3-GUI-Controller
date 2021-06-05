@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 03/06/2021
+ * Last Modified: 05/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -106,7 +106,7 @@ namespace AUTD3Controller.Models
     {
         Sine,
         Static,
-        Saw,
+        SinePressure,
         Square
     }
 
@@ -144,9 +144,9 @@ namespace AUTD3Controller.Models
         [DataMember] public PlaneWave PlaneWave { get; set; } = new PlaneWave(0, 0, 1);
         [DataMember] public TransducerTest TransducerTest { get; set; } = new TransducerTest(0, 0xFF, 0);
 
-        [DataMember] public SineModulation Sine { get; set; } = new SineModulation(150, 1.0f, 0.5f);
+        [DataMember] public SineModulation Sine { get; set; } = new SineModulation(150, 1.0, 0.5);
         [DataMember] public StaticModulation Static { get; set; } = new StaticModulation(0xFF);
-        [DataMember] public SawModulation Saw { get; set; } = new SawModulation(150);
+        [DataMember] public SinePressureModulation SinePressure { get; set; } = new SinePressureModulation(150, 1.0, 0.5);
         [DataMember] public SquareModulation Square { get; set; } = new SquareModulation(150, 0x00, 0xFF);
 
         [DataMember] public Seq Seq { get; set; } = new Seq();

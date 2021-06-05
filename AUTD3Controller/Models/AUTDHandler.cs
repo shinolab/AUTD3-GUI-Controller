@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 03/06/2021
+ * Last Modified: 05/06/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -105,7 +105,7 @@ namespace AUTD3Controller.Models
             {
                 ModulationSelect.Static => instance.Static.ToModulation(),
                 ModulationSelect.Sine => instance.Sine.ToModulation(),
-                ModulationSelect.Saw => instance.Saw.ToModulation(),
+                ModulationSelect.SinePressure => instance.Sine.ToModulation(),
                 ModulationSelect.Square => instance.Square.ToModulation(),
                 _ => throw new ArgumentOutOfRangeException()
             };
