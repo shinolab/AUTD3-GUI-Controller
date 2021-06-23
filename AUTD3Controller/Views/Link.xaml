@@ -37,7 +37,6 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Text="Link" Foreground="{StaticResource PrimaryHueDarkForegroundBrush}" FontSize="{StaticResource TitleFontSize}"/>
@@ -122,43 +121,7 @@ Copyright (c) 2021 Hapis Lab. All rights reserved.
                     </GroupBox>
                 </Grid>
             </ScrollViewer>
-            <ScrollViewer Grid.Row="2" Margin="0 12 0 0" VerticalScrollBarVisibility="Auto">
-                <WrapPanel>
-                    <GroupBox Style="{DynamicResource MaterialDesignCardGroupBox}" materialDesign:ColorZoneAssist.Mode="PrimaryDark" 
-                              Margin="0 12 0 0">
-                        <GroupBox.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock
-                                        FontSize="{StaticResource HeaderFontSize}"
-                                        VerticalAlignment="Center"
-                                        Style="{StaticResource MaterialDesignSubtitle1TextBlock}"
-                                        Text="Property" />
-                            </DataTemplate>
-                        </GroupBox.HeaderTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Row="0" Grid.Column="0" Text="modulation frequency division: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                   Text="{Binding ModFrequencyDivision.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                   Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
-                                <TextBlock Grid.Row="1" Grid.Column="0" Text="modulation buffer size: " FontSize="20" Foreground="{StaticResource MaterialDesignDarkForeground}" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" Width="80" TextAlignment="Right" 
-                                     Text="{Binding ModBufSize.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     Foreground="{StaticResource MaterialDesignDarkForeground}" FontSize="20"/>
-                            </Grid>
-                        </StackPanel>
-                    </GroupBox>
-                </WrapPanel>
-            </ScrollViewer>
-            <Grid Grid.Row="3" HorizontalAlignment="Right">
+            <Grid Grid.Row="2" HorizontalAlignment="Right">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>

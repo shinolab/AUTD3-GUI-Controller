@@ -32,8 +32,6 @@ namespace AUTD3Controller.ViewModels
         public ReactiveProperty<LinkSelect> LinkSelected { get; }
 
         public ReactiveProperty<uint> CycleTicks { get; }
-        public ReactiveProperty<ushort> ModFrequencyDivision { get; }
-        public ReactiveProperty<ushort> ModBufSize { get; }
 
         public AsyncReactiveCommand UpdateInterfaces { get; }
         public AsyncReactiveCommand Open { get; }
@@ -45,8 +43,6 @@ namespace AUTD3Controller.ViewModels
 
             LinkSelected = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.LinkSelected);
             CycleTicks = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.CycleTicks);
-            ModFrequencyDivision = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.ModFrequencyDivision);
-            ModBufSize = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.ModBufSize);
 
             try
             {
@@ -68,7 +64,7 @@ namespace AUTD3Controller.ViewModels
                 }
                 catch (DllNotFoundException e)
                 {
-                    var vm = new ErrorDialogViewModel { Message = { Value = $"{e.Message}.\nDid you install npcap or wpcap?" } };
+                    var vm = new ErrorDialogViewModel { Message = { Value = $"{e.Message}.\nDid you install npcap or winpcap?" } };
                     var dialog = new ErrorDialog
                     {
                         DataContext = vm

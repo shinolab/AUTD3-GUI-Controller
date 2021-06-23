@@ -130,9 +130,6 @@ namespace AUTD3Controller.Models
         [DataMember]
         public uint CycleTicks { get; set; } = 1;
 
-        [DataMember] public ushort ModFrequencyDivision { get; set; } = 10;
-        [DataMember] public ushort ModBufSize { get; set; } = 4000;
-
         [DataMember]
         public GainSelect GainSelect { get; set; }
         [DataMember]
