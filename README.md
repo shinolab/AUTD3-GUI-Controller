@@ -1,6 +1,6 @@
 # Graphical User Interface for [autd3-library](https://github.com/shinolab/autd3-library-software)
 
-version 1.2.0
+version 1.5.0
 
 Currently, Windows is only supported.
 
