@@ -28,11 +28,11 @@ namespace AUTD3Controller.ViewModels
     internal class LinkViewModel : ReactivePropertyBase
     {
         public ObservableCollection<string> Interfaces { get; }
-        public ReactiveProperty<string> InterfaceName { get; }
-        public ReactiveProperty<LinkSelect> LinkSelected { get; }
+        public ReactivePropertySlim<string> InterfaceName { get; }
+        public ReactivePropertySlim<LinkSelect> LinkSelected { get; }
 
-        public ReactiveProperty<uint> CycleTicks { get; }
-        public ReactiveProperty<ushort> EmulatorPort { get; }
+        public ReactivePropertySlim<uint> CycleTicks { get; }
+        public ReactivePropertySlim<ushort> EmulatorPort { get; }
 
         public AsyncReactiveCommand UpdateInterfaces { get; }
         public AsyncReactiveCommand Open { get; }
@@ -42,9 +42,9 @@ namespace AUTD3Controller.ViewModels
         {
             Interfaces = new ObservableCollection<string>();
 
-            LinkSelected = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.LinkSelected);
-            CycleTicks = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.CycleTicks);
-            EmulatorPort = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.EmulatorPort);
+            LinkSelected = AUTDSettings.Instance.ToReactivePropertySlimAsSynchronized(i => i.LinkSelected);
+            CycleTicks = AUTDSettings.Instance.ToReactivePropertySlimAsSynchronized(i => i.CycleTicks);
+            EmulatorPort = AUTDSettings.Instance.ToReactivePropertySlimAsSynchronized(i => i.EmulatorPort);
 
             try
             {
@@ -55,7 +55,7 @@ namespace AUTD3Controller.ViewModels
                 LinkSelected.Value = LinkSelect.TwinCAT;
             }
 
-            InterfaceName = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.InterfaceName);
+            InterfaceName = AUTDSettings.Instance.ToReactivePropertySlimAsSynchronized(i => i.InterfaceName);
 
             UpdateInterfaces = LinkSelected.Select(s => s == LinkSelect.SOEM).ToAsyncReactiveCommand();
             UpdateInterfaces.Subscribe(async _ =>

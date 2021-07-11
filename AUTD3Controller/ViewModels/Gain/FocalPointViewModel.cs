@@ -21,13 +21,11 @@ namespace AUTD3Controller.ViewModels.Gain
 {
     public class FocalPointViewModel : ReactivePropertyBase
     {
-
-
-        public ReactiveProperty<FocalPoint> Focus { get; }
+        public ReactivePropertySlim<FocalPoint> Focus { get; }
 
         public FocalPointViewModel()
         {
-            Focus = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Focus);
+            Focus = AUTDSettings.Instance.ToReactivePropertySlimAsSynchronized(i => i.Focus);
         }
     }
 }

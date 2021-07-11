@@ -26,14 +26,14 @@ namespace AUTD3Controller.Models
         public static AUTDHandler Instance => Lazy.Value;
 
         private readonly AUTD _autd;
-        public ReactiveProperty<bool> IsOpen { get; }
-        public ReactiveProperty<bool> IsRunning { get; }
+        public ReactivePropertySlim<bool> IsOpen { get; }
+        public ReactivePropertySlim<bool> IsRunning { get; }
 
         private AUTDHandler()
         {
             _autd = new AUTD();
-            IsOpen = new ReactiveProperty<bool>(false);
-            IsRunning = new ReactiveProperty<bool>(false);
+            IsOpen = new ReactivePropertySlim<bool>();
+            IsRunning = new ReactivePropertySlim<bool>();
         }
 
         private void AddDevices()
@@ -102,7 +102,7 @@ namespace AUTD3Controller.Models
             {
                 ModulationSelect.Static => instance.Static.ToModulation(),
                 ModulationSelect.Sine => instance.Sine.ToModulation(),
-                ModulationSelect.SinePressure => instance.Sine.ToModulation(),
+                ModulationSelect.SinePressure => instance.SinePressure.ToModulation(),
                 ModulationSelect.Square => instance.Square.ToModulation(),
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -127,7 +127,6 @@ namespace AUTD3Controller.Models
         public void Dispose()
         {
             _autd.Clear();
-            _autd.Close();
             _autd.Dispose();
         }
     }

@@ -64,9 +64,7 @@ namespace AUTD3Controller
 
     public class MainWindowViewModel : ReactivePropertyBase
     {
-
-
-        public ReactiveProperty<Page> Page { get; }
+        public ReactivePropertySlim<Page> Page { get; }
 
         public ReactiveCommand<string> TransitPage { get; }
         public AsyncReactiveCommand ButtonPower { get; }
@@ -85,7 +83,7 @@ namespace AUTD3Controller
             Dictionary<string, Page> pageCache = new Dictionary<string, Page>();
 
             Model = new MainWindowModel();
-            Page = Model.ToReactivePropertyAsSynchronized(m => m.Page);
+            Page = Model.ToReactivePropertySlimAsSynchronized(m => m.Page);
 
             TransitPage = new ReactiveCommand<string>();
             TransitPage.Subscribe(page =>

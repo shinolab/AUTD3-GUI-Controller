@@ -12,7 +12,7 @@
  */
 
 using AUTD3Controller.Helpers;
-using AUTD3Controller.Models; 
+using AUTD3Controller.Models;
 using AUTD3Controller.Models.Modulation;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
@@ -21,11 +21,11 @@ namespace AUTD3Controller.ViewModels.Modulation
 {
     public class SinePressureModulationViewModel : ReactivePropertyBase
     {
-        public ReactiveProperty<SinePressureModulation> SinePressure { get; }
+        public ReactivePropertySlim<SinePressureModulation> SinePressure { get; }
 
         public SinePressureModulationViewModel()
         {
-            SinePressure = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.SinePressure);
+            SinePressure = AUTDSettings.Instance.ToReactivePropertySlimAsSynchronized(i => i.SinePressure);
         }
     }
 }

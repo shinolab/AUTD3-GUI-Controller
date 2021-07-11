@@ -26,13 +26,11 @@ namespace AUTD3Controller.Domain
 
     public class ConfirmDialogViewModel : ReactivePropertyBase
     {
-
-
-        public ReactiveProperty<string> Message { get; set; }
+        public ReactivePropertySlim<string> Message { get; set; }
 
         public ConfirmDialogViewModel()
         {
-            Message = new ReactiveProperty<string>();
+            Message = new ReactivePropertySlim<string>();
         }
     }
 }
