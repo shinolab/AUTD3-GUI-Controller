@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 05/06/2021
+ * Last Modified: 11/07/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -90,7 +90,8 @@ namespace AUTD3Controller.Models
     public enum LinkSelect
     {
         SOEM,
-        TwinCAT
+        TwinCAT,
+        Emulator
     }
 
     public enum GainSelect
@@ -129,6 +130,9 @@ namespace AUTD3Controller.Models
 
         [DataMember]
         public uint CycleTicks { get; set; } = 1;
+
+        [DataMember]
+        public ushort EmulatorPort { get; set; } = 50632;
 
         [DataMember]
         public GainSelect GainSelect { get; set; }

@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 05/06/2021
+ * Last Modified: 11/07/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -53,12 +53,10 @@ namespace AUTD3Controller.Models
 
                 var link = AUTDSettings.Instance.LinkSelected switch
                 {
-                    LinkSelect.SOEM =>
-                        Link.SOEM(
-                            AUTDSettings.Instance.InterfaceName.Split(',').LastOrDefault()?.Trim() ?? string.Empty,
+                    LinkSelect.SOEM => Link.SOEM(AUTDSettings.Instance.InterfaceName.Split(',').LastOrDefault()?.Trim() ?? string.Empty,
                             _autd.NumDevices, AUTDSettings.Instance.CycleTicks),
-                    LinkSelect.TwinCAT =>
-                        Link.TwinCAT(),
+                    LinkSelect.TwinCAT => Link.TwinCAT(),
+                    LinkSelect.Emulator => Link.Emulator(AUTDSettings.Instance.EmulatorPort, _autd),
                     _ => throw new NotImplementedException()
                 };
 

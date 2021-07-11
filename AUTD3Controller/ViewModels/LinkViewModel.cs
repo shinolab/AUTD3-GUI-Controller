@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 03/06/2021
+ * Last Modified: 11/07/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -32,6 +32,7 @@ namespace AUTD3Controller.ViewModels
         public ReactiveProperty<LinkSelect> LinkSelected { get; }
 
         public ReactiveProperty<uint> CycleTicks { get; }
+        public ReactiveProperty<ushort> EmulatorPort { get; }
 
         public AsyncReactiveCommand UpdateInterfaces { get; }
         public AsyncReactiveCommand Open { get; }
@@ -43,6 +44,7 @@ namespace AUTD3Controller.ViewModels
 
             LinkSelected = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.LinkSelected);
             CycleTicks = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.CycleTicks);
+            EmulatorPort = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.EmulatorPort);
 
             try
             {
