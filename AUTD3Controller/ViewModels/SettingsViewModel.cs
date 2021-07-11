@@ -21,14 +21,12 @@ namespace AUTD3Controller.ViewModels
 {
     public class SettingsViewModel : ReactivePropertyBase
     {
-
-
         public AngleUnit[] AngleUnits { get; } = (AngleUnit[])Enum.GetValues(typeof(AngleUnit));
-        public ReactiveProperty<AngleUnit> AngleUnit { get; }
+        public ReactivePropertySlim<AngleUnit> AngleUnit { get; }
 
         public SettingsViewModel()
         {
-            AngleUnit = General.Instance.ToReactivePropertyAsSynchronized(g => g.AngleUnit);
+            AngleUnit = General.Instance.ToReactivePropertySlimAsSynchronized(g => g.AngleUnit);
         }
     }
 }

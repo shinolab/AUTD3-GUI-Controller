@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 05/06/2021
+ * Last Modified: 11/07/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -56,41 +56,42 @@ namespace AUTD3Controller.Models
 
     public class GeometrySettingReactive : ReactivePropertyBase
     {
-        public ReactiveProperty<int> No { get; }
-        public ReactiveProperty<double> X { get; }
-        public ReactiveProperty<double> Y { get; }
-        public ReactiveProperty<double> Z { get; }
-        public ReactiveProperty<double> RotateZ1 { get; }
-        public ReactiveProperty<double> RotateY { get; }
-        public ReactiveProperty<double> RotateZ2 { get; }
+        public ReactivePropertySlim<int> No { get; }
+        public ReactivePropertySlim<double> X { get; }
+        public ReactivePropertySlim<double> Y { get; }
+        public ReactivePropertySlim<double> Z { get; }
+        public ReactivePropertySlim<double> RotateZ1 { get; }
+        public ReactivePropertySlim<double> RotateY { get; }
+        public ReactivePropertySlim<double> RotateZ2 { get; }
 
         public GeometrySettingReactive(int id)
         {
-            No = new ReactiveProperty<int>(id);
-            X = new ReactiveProperty<double>();
-            Y = new ReactiveProperty<double>();
-            Z = new ReactiveProperty<double>();
-            RotateZ1 = new ReactiveProperty<double>();
-            RotateY = new ReactiveProperty<double>();
-            RotateZ2 = new ReactiveProperty<double>();
+            No = new ReactivePropertySlim<int>(id);
+            X = new ReactivePropertySlim<double>();
+            Y = new ReactivePropertySlim<double>();
+            Z = new ReactivePropertySlim<double>();
+            RotateZ1 = new ReactivePropertySlim<double>();
+            RotateY = new ReactivePropertySlim<double>();
+            RotateZ2 = new ReactivePropertySlim<double>();
         }
 
         public GeometrySettingReactive(GeometrySetting obj)
         {
-            No = new ReactiveProperty<int>(obj.No);
-            X = new ReactiveProperty<double>(obj.X);
-            Y = new ReactiveProperty<double>(obj.Y);
-            Z = new ReactiveProperty<double>(obj.Z);
-            RotateZ1 = new ReactiveProperty<double>(obj.RotateZ1);
-            RotateY = new ReactiveProperty<double>(obj.RotateY);
-            RotateZ2 = new ReactiveProperty<double>(obj.RotateZ2);
+            No = new ReactivePropertySlim<int>(obj.No);
+            X = new ReactivePropertySlim<double>(obj.X);
+            Y = new ReactivePropertySlim<double>(obj.Y);
+            Z = new ReactivePropertySlim<double>(obj.Z);
+            RotateZ1 = new ReactivePropertySlim<double>(obj.RotateZ1);
+            RotateY = new ReactivePropertySlim<double>(obj.RotateY);
+            RotateZ2 = new ReactivePropertySlim<double>(obj.RotateZ2);
         }
     }
 
     public enum LinkSelect
     {
         SOEM,
-        TwinCAT
+        TwinCAT,
+        Emulator
     }
 
     public enum GainSelect
@@ -129,6 +130,9 @@ namespace AUTD3Controller.Models
 
         [DataMember]
         public uint CycleTicks { get; set; } = 1;
+
+        [DataMember]
+        public ushort EmulatorPort { get; set; } = 50632;
 
         [DataMember]
         public GainSelect GainSelect { get; set; }

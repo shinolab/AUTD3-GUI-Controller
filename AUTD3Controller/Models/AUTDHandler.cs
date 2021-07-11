@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 05/06/2021
+ * Last Modified: 11/07/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -26,14 +26,14 @@ namespace AUTD3Controller.Models
         public static AUTDHandler Instance => Lazy.Value;
 
         private readonly AUTD _autd;
-        public ReactiveProperty<bool> IsOpen { get; }
-        public ReactiveProperty<bool> IsRunning { get; }
+        public ReactivePropertySlim<bool> IsOpen { get; }
+        public ReactivePropertySlim<bool> IsRunning { get; }
 
         private AUTDHandler()
         {
             _autd = new AUTD();
-            IsOpen = new ReactiveProperty<bool>(false);
-            IsRunning = new ReactiveProperty<bool>(false);
+            IsOpen = new ReactivePropertySlim<bool>();
+            IsRunning = new ReactivePropertySlim<bool>();
         }
 
         private void AddDevices()
@@ -53,12 +53,10 @@ namespace AUTD3Controller.Models
 
                 var link = AUTDSettings.Instance.LinkSelected switch
                 {
-                    LinkSelect.SOEM =>
-                        Link.SOEM(
-                            AUTDSettings.Instance.InterfaceName.Split(',').LastOrDefault()?.Trim() ?? string.Empty,
+                    LinkSelect.SOEM => Link.SOEM(AUTDSettings.Instance.InterfaceName.Split(',').LastOrDefault()?.Trim() ?? string.Empty,
                             _autd.NumDevices, AUTDSettings.Instance.CycleTicks),
-                    LinkSelect.TwinCAT =>
-                        Link.TwinCAT(),
+                    LinkSelect.TwinCAT => Link.TwinCAT(),
+                    LinkSelect.Emulator => Link.Emulator(AUTDSettings.Instance.EmulatorPort, _autd),
                     _ => throw new NotImplementedException()
                 };
 
@@ -104,7 +102,7 @@ namespace AUTD3Controller.Models
             {
                 ModulationSelect.Static => instance.Static.ToModulation(),
                 ModulationSelect.Sine => instance.Sine.ToModulation(),
-                ModulationSelect.SinePressure => instance.Sine.ToModulation(),
+                ModulationSelect.SinePressure => instance.SinePressure.ToModulation(),
                 ModulationSelect.Square => instance.Square.ToModulation(),
                 _ => throw new ArgumentOutOfRangeException()
             };
@@ -129,7 +127,6 @@ namespace AUTD3Controller.Models
         public void Dispose()
         {
             _autd.Clear();
-            _autd.Close();
             _autd.Dispose();
         }
     }

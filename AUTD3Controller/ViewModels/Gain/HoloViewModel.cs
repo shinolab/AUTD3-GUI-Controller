@@ -32,12 +32,10 @@ namespace AUTD3Controller.ViewModels.Gain
 
     public class HoloViewModel : ReactivePropertyBase, IDropTarget
     {
-
-
-        public ReactiveProperty<Holo> Holo { get; }
+        public ReactivePropertySlim<Holo> Holo { get; }
 
         public ObservableCollectionWithItemNotify<HoloSettingReactive> HoloSettings { get; }
-        public ReactiveProperty<HoloSettingReactive?> Current { get; }
+        public ReactivePropertySlim<HoloSettingReactive?> Current { get; }
 
         public OptMethod[] OptMethods { get; } = (OptMethod[])Enum.GetValues(typeof(OptMethod));
 
@@ -48,11 +46,11 @@ namespace AUTD3Controller.ViewModels.Gain
 
         public HoloViewModel()
         {
-            Holo = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Holo);
+            Holo = AUTDSettings.Instance.ToReactivePropertySlimAsSynchronized(i => i.Holo);
 
             HoloSettings = AUTDSettings.Instance.Holo.HoloSettingsReactive;
 
-            Current = new ReactiveProperty<HoloSettingReactive?>();
+            Current = new ReactivePropertySlim<HoloSettingReactive?>();
             AddItem = new ReactiveCommand();
             RemoveItem = Current.Select(c => c != null).ToReactiveCommand();
             UpItem = Current.Select(c => c != null && c.No.Value != 0).ToReactiveCommand();

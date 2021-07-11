@@ -21,13 +21,11 @@ namespace AUTD3Controller.ViewModels.Gain
 {
     public class BesselBeamViewModel : ReactivePropertyBase
     {
-
-
-        public ReactiveProperty<BesselBeam> Bessel { get; }
+        public ReactivePropertySlim<BesselBeam> Bessel { get; }
 
         public BesselBeamViewModel()
         {
-            Bessel = AUTDSettings.Instance.ToReactivePropertyAsSynchronized(i => i.Bessel);
+            Bessel = AUTDSettings.Instance.ToReactivePropertySlimAsSynchronized(i => i.Bessel);
         }
     }
 }

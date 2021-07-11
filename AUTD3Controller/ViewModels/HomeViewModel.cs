@@ -20,13 +20,11 @@ namespace AUTD3Controller.ViewModels
 {
     public class HomeViewModel : ReactivePropertyBase
     {
-
-
-        public ReactiveProperty<AngleUnit> AngleUnit { get; }
+        public ReactivePropertySlim<AngleUnit> AngleUnit { get; }
 
         public HomeViewModel()
         {
-            AngleUnit = General.Instance.ToReactivePropertyAsSynchronized(g => g.AngleUnit);
+            AngleUnit = General.Instance.ToReactivePropertySlimAsSynchronized(g => g.AngleUnit);
         }
     }
 }

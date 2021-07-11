@@ -27,7 +27,7 @@ namespace AUTD3Controller.ViewModels
     {
         public ReactiveCommand SendModulationCommand { get; }
 
-        public ReactiveProperty<Page> Page { get; }
+        public ReactivePropertySlim<Page> Page { get; }
         public ReactiveCommand<string> TransitPage { get; }
 
         public ModulationViewModel()
@@ -36,7 +36,7 @@ namespace AUTD3Controller.ViewModels
             SendModulationCommand.Subscribe(_ => AUTDHandler.Instance.SendModulation());
 
             Dictionary<string, Page> pageCache = new Dictionary<string, Page>();
-            Page = new ReactiveProperty<Page>(new SineView());
+            Page = new ReactivePropertySlim<Page>(new SineView());
 
             TransitPage = new ReactiveCommand<string>();
             TransitPage.Subscribe(page =>
