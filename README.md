@@ -1,8 +1,12 @@
 # Graphical User Interface for [autd3-library](https://github.com/shinolab/autd3-library-software)
 
-version 1.5.1
+version 1.6.0
 
-Currently, Windows is only supported.
+## Limitation
+
+* Currently, Windows is only supported.
+* Gain.Grouped is not supported
+* GainSequence is not supported
 
 ## :mortar_board: Citing
 

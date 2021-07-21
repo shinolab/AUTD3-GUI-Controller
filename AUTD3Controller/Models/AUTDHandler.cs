@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 11/07/2021
+ * Last Modified: 21/07/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -126,7 +126,11 @@ namespace AUTD3Controller.Models
 
         public void Dispose()
         {
-            _autd.Clear();
+            if (_autd.IsOpen)
+            {
+                _autd.Clear();
+                _autd.Close();
+            }
             _autd.Dispose();
         }
     }
