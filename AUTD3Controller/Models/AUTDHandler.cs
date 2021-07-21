@@ -126,8 +126,11 @@ namespace AUTD3Controller.Models
 
         public void Dispose()
         {
-            _autd.Clear();
-            _autd.Close();
+            if (_autd.IsOpen)
+            {
+                _autd.Clear();
+                _autd.Close();
+            }
             _autd.Dispose();
         }
     }
