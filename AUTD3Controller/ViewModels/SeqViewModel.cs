@@ -4,7 +4,7 @@
  * Created Date: 06/05/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 03/06/2021
+ * Last Modified: 07/09/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -32,8 +32,8 @@ namespace AUTD3Controller.ViewModels
     {
         public ReactivePropertySlim<Seq> Seq { get; }
 
-        public ObservableCollectionWithItemNotify<Vector3Reactive> Points { get; }
-        public ReactivePropertySlim<Vector3Reactive?> Current { get; }
+        public ObservableCollectionWithItemNotify<ControlPointsReactive> Points { get; }
+        public ReactivePropertySlim<ControlPointsReactive?> Current { get; }
 
         public ReactiveCommand AddItem { get; }
         public ReactiveCommand RemoveItem { get; }
@@ -54,7 +54,7 @@ namespace AUTD3Controller.ViewModels
                 AUTDHandler.Instance.SendSeq();
             });
 
-            Current = new ReactivePropertySlim<Vector3Reactive?>();
+            Current = new ReactivePropertySlim<ControlPointsReactive?>();
             AddItem = new ReactiveCommand();
             RemoveItem = Current.Select(c => c != null).ToReactiveCommand();
             UpItem = Current.Select(c => c != null && c.No.Value != 0).ToReactiveCommand();
@@ -62,7 +62,7 @@ namespace AUTD3Controller.ViewModels
 
             AddItem.Subscribe(_ =>
             {
-                var item = new Vector3Reactive(Points.Count);
+                var item = new ControlPointsReactive(Points.Count);
                 Points.Add(item);
                 Current.Value = item;
             });

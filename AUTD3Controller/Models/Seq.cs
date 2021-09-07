@@ -4,7 +4,7 @@
  * Created Date: 06/05/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 03/06/2021
+ * Last Modified: 07/09/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -22,15 +22,16 @@ namespace AUTD3Controller.Models
     public class Seq
     {
         [JsonIgnore]
-        public ObservableCollectionWithItemNotify<Vector3Reactive> PointsReactive { get; internal set; }
+        public ObservableCollectionWithItemNotify<ControlPointsReactive> PointsReactive { get; internal set; }
 
         public Vector3Class[]? Points { get; set; }
+        public byte[]? Duties { get; set; }
 
         public double Frequency { get; set; }
 
         public Seq()
         {
-            PointsReactive = new ObservableCollectionWithItemNotify<Vector3Reactive>();
+            PointsReactive = new ObservableCollectionWithItemNotify<ControlPointsReactive>();
             Points = null;
             Frequency = 1;
         }
@@ -38,7 +39,7 @@ namespace AUTD3Controller.Models
         public PointSequence ToPointSequence()
         {
             var seq = PointSequence.Create();
-            seq.AddPoints(PointsReactive.Select(s => new Vector3d(s.X.Value, s.Y.Value, s.Z.Value)).ToArray());
+            seq.AddPoints(PointsReactive.Select(s => new Vector3d(s.X.Value, s.Y.Value, s.Z.Value)).ToArray(), PointsReactive.Select(s => s.Duty.Value).ToArray());
             seq.Frequency = Frequency;
             return seq;
         }

@@ -4,7 +4,7 @@
  * Created Date: 07/04/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 03/06/2021
+ * Last Modified: 07/09/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -35,7 +35,15 @@ namespace AUTD3Controller.Models
 
         internal static void CopyGeometry() => AUTDSettings.Instance.Geometries = AUTDSettings.Instance.GeometriesReactive.Select(g => new GeometrySetting(g)).ToArray();
         internal static void CopyHoloSetting() => AUTDSettings.Instance.Holo.HoloSettings = AUTDSettings.Instance.Holo.HoloSettingsReactive.Select(s => new HoloSetting(s)).ToArray();
-        internal static void CopySeq() => AUTDSettings.Instance.Seq.Points = AUTDSettings.Instance.Seq.PointsReactive.Select(s => s.ToVector3()).ToArray();
+
+        internal static void CopySeq()
+        {
+            AUTDSettings.Instance.Seq.Points =
+                AUTDSettings.Instance.Seq.PointsReactive.Select(s => s.ToVector3()).ToArray();
+            AUTDSettings.Instance.Seq.Duties =
+                AUTDSettings.Instance.Seq.PointsReactive.Select(s => s.Duty.Value).ToArray();
+        }
+
         internal static void LoadGeometry()
         {
             AUTDSettings.Instance.GeometriesReactive = new ObservableCollectionWithItemNotify<GeometrySettingReactive>();
@@ -50,9 +58,9 @@ namespace AUTD3Controller.Models
         }
         internal static void LoadSeq()
         {
-            AUTDSettings.Instance.Seq.PointsReactive = new ObservableCollectionWithItemNotify<Vector3Reactive>();
+            AUTDSettings.Instance.Seq.PointsReactive = new ObservableCollectionWithItemNotify<ControlPointsReactive>();
             if (AUTDSettings.Instance.Seq.Points == null) return;
-            foreach (var (s, i) in AUTDSettings.Instance.Seq.Points.Select((s, i) => (s, i))) AUTDSettings.Instance.Seq.PointsReactive.Add(new Vector3Reactive(i, s));
+            foreach (var ((p, d), i) in AUTDSettings.Instance.Seq.Points.Zip(AUTDSettings.Instance.Seq.Duties).Select((s, i) => (s, i))) AUTDSettings.Instance.Seq.PointsReactive.Add(new ControlPointsReactive(i, p, d));
         }
 
         internal static void SaveSetting(string path)
