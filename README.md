@@ -1,6 +1,6 @@
 # Graphical User Interface for [autd3-library](https://github.com/shinolab/autd3-library-software)
 
-version 1.8.0
+version 1.8.1
 
 ## Limitation
 
@@ -17,7 +17,7 @@ If you use this program in your research please consider to include the followin
 
 ## :copyright: LICENSE
 
-See [LICENSE](./LICENSE).
+See [LICENSE](./LICENSE) and [NOTICE](./NOTICE).
 
 # Author
 
