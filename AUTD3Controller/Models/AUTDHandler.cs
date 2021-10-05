@@ -4,7 +4,7 @@
  * Created Date: 31/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 21/07/2021
+ * Last Modified: 05/10/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -90,7 +90,7 @@ namespace AUTD3Controller.Models
                 GainSelect.TransducerTest => instance.TransducerTest.ToGain(),
                 _ => throw new ArgumentOutOfRangeException()
             };
-            var res = _autd.Send(gain);
+            var res = _autd.Send(gain) >= 0;
             IsRunning.Value = res;
             return res;
         }
@@ -106,14 +106,14 @@ namespace AUTD3Controller.Models
                 ModulationSelect.Square => instance.Square.ToModulation(),
                 _ => throw new ArgumentOutOfRangeException()
             };
-            return _autd.Send(gain);
+            return _autd.Send(gain) >= 0;
         }
 
         public bool SendSeq()
         {
             var instance = AUTDSettings.Instance;
             var seq = instance.Seq.ToPointSequence();
-            var res = _autd.Send(seq);
+            var res = _autd.Send(seq) >= 0;
             IsRunning.Value = res;
             return res;
         }

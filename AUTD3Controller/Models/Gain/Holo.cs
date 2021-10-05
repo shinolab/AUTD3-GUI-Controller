@@ -4,7 +4,7 @@
  * Created Date: 30/04/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 03/06/2021
+ * Last Modified: 05/10/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -116,21 +116,29 @@ namespace AUTD3Controller.Models.Gain
         public uint GSPATRepeat { get; set; } = 100;
         public int GreedyPhaseDiv { get; set; } = 16;
 
+        private readonly IntPtr _backend;
+
         public Holo()
         {
             HoloSettingsReactive = new ObservableCollectionWithItemNotify<HoloSettingReactive>();
             HoloSettings = null;
+            _backend = AUTD3Sharp.Gain.Eigen3Backend();
+        }
+
+        ~Holo()
+        {
+            AUTD3Sharp.Gain.DeleteBackend(_backend);
         }
 
         public AUTD3Sharp.Gain ToGain() => OptMethod switch
         {
-            OptMethod.SDP => AUTD3Sharp.Gain.HoloSDP(Foci, Amps, SDPParams.Alpha, SDPParams.Lambda, SDPParams.Repeat, SDPParams.NormalizeAmp),
-            OptMethod.EVD => AUTD3Sharp.Gain.HoloEVD(Foci, Amps, EVDParams.Gamma, EVDParams.NormalizeAmp),
-            OptMethod.GS => AUTD3Sharp.Gain.HoloGS(Foci, Amps, GSRepeat),
-            OptMethod.GSPAT => AUTD3Sharp.Gain.HoloGSPAT(Foci, Amps, GSPATRepeat),
-            OptMethod.Naive => AUTD3Sharp.Gain.HoloNaive(Foci, Amps),
-            OptMethod.LM => AUTD3Sharp.Gain.HoloLM(Foci, Amps, NLSParams.Eps1, NLSParams.Eps2, NLSParams.Tau, NLSParams.KMax),
-            OptMethod.Greedy => AUTD3Sharp.Gain.HoloGreedy(Foci, Amps, GreedyPhaseDiv),
+            OptMethod.SDP => AUTD3Sharp.Gain.HoloSDP(Foci, Amps, _backend, SDPParams.Alpha, SDPParams.Lambda, SDPParams.Repeat, SDPParams.NormalizeAmp),
+            OptMethod.EVD => AUTD3Sharp.Gain.HoloEVD(Foci, Amps, _backend, EVDParams.Gamma, EVDParams.NormalizeAmp),
+            OptMethod.GS => AUTD3Sharp.Gain.HoloGS(Foci, Amps, _backend, GSRepeat),
+            OptMethod.GSPAT => AUTD3Sharp.Gain.HoloGSPAT(Foci, Amps, _backend, GSPATRepeat),
+            OptMethod.Naive => AUTD3Sharp.Gain.HoloNaive(Foci, Amps, _backend),
+            OptMethod.LM => AUTD3Sharp.Gain.HoloLM(Foci, Amps, _backend, NLSParams.Eps1, NLSParams.Eps2, NLSParams.Tau, NLSParams.KMax),
+            OptMethod.Greedy => AUTD3Sharp.Gain.HoloGreedy(Foci, Amps, _backend, GreedyPhaseDiv),
             _ => throw new ArgumentOutOfRangeException()
         };
 
