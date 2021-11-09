@@ -4,7 +4,7 @@
  * Created Date: 07/04/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 07/09/2021
+ * Last Modified: 10/11/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -59,7 +59,7 @@ namespace AUTD3Controller.Models
         internal static void LoadSeq()
         {
             AUTDSettings.Instance.Seq.PointsReactive = new ObservableCollectionWithItemNotify<ControlPointsReactive>();
-            if (AUTDSettings.Instance.Seq.Points == null) return;
+            if (AUTDSettings.Instance.Seq.Points is null || AUTDSettings.Instance.Seq.Duties is null) return;
             foreach (var ((p, d), i) in AUTDSettings.Instance.Seq.Points.Zip(AUTDSettings.Instance.Seq.Duties).Select((s, i) => (s, i))) AUTDSettings.Instance.Seq.PointsReactive.Add(new ControlPointsReactive(i, p, d));
         }
 
@@ -80,6 +80,7 @@ namespace AUTD3Controller.Models
         {
             var jsonString = File.ReadAllText(path);
             var obj = JsonSerializer.Deserialize<TotalSetting>(jsonString);
+            if (obj is null) return;
             AUTDSettings.Instance = obj.AUTDSettings;
             General.Instance = obj.General;
             LoadGeometry();

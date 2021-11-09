@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 11/07/2021
+ * Last Modified: 10/11/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -152,7 +152,7 @@ namespace AUTD3Controller.Models
 
         [DataMember] public Seq Seq { get; set; } = new Seq();
 
-        private AUTDSettings()
+        public AUTDSettings()
         {
             InterfaceName = string.Empty;
             GeometriesReactive = new ObservableCollectionWithItemNotify<GeometrySettingReactive>();

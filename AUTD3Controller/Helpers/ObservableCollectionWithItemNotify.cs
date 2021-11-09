@@ -4,7 +4,7 @@
  * Created Date: 29/03/2021
  * Author: Shun Suzuki
  * -----
- * Last Modified: 03/06/2021
+ * Last Modified: 10/11/2021
  * Modified By: Shun Suzuki (suzuki@hapis.k.u-tokyo.ac.jp)
  * -----
  * Copyright (c) 2021 Hapis Lab. All rights reserved.
@@ -20,7 +20,7 @@ namespace AUTD3Controller.Helpers
 {
     public sealed class ObservableCollectionWithItemNotify<T> : ObservableCollection<T> where T : ReactivePropertyBase
     {
-
+#pragma warning disable CS8622
         public ObservableCollectionWithItemNotify()
         {
             CollectionChanged += ItemsCollectionChanged;
@@ -47,5 +47,6 @@ namespace AUTD3Controller.Helpers
             var reset = new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset);
             OnCollectionChanged(reset);
         }
+#pragma warning restore CS8622
     }
 }
