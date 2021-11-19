@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views.Modulation
+﻿namespace AUTD3Controller.Views.Modulation;
+
+public partial class SinePressureView
 {
-    public partial class SinePressureView
+    public SinePressureView()
     {
-        public SinePressureView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

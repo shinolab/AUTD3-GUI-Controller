@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views.Gain
+﻿namespace AUTD3Controller.Views.Gain;
+
+public partial class BesselBeamView
 {
-    public partial class BesselBeamView
+    public BesselBeamView()
     {
-        public BesselBeamView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -1,6 +1,5 @@
-﻿namespace AUTD3Controller
+﻿namespace AUTD3Controller;
+
+public partial class App
 {
-    public partial class App
-    {
-    }
 }

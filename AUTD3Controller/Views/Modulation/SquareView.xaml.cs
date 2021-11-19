@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views.Modulation
+﻿namespace AUTD3Controller.Views.Modulation;
+
+public partial class SquareView
 {
-    public partial class SquareView
+    public SquareView()
     {
-        public SquareView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

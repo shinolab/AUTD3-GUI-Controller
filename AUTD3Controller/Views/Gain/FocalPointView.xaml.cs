@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views.Gain
+﻿namespace AUTD3Controller.Views.Gain;
+
+public partial class FocalPointView
 {
-    public partial class FocalPointView
+    public FocalPointView()
     {
-        public FocalPointView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views
+﻿namespace AUTD3Controller.Views;
+
+public partial class Home
 {
-    public partial class Home
+    public Home()
     {
-        public Home()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

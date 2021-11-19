@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views
+﻿namespace AUTD3Controller.Views;
+
+public partial class Seq
 {
-    public partial class Seq
+    public Seq()
     {
-        public Seq()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

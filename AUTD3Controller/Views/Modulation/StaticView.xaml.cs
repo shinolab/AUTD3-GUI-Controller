@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views.Modulation
+﻿namespace AUTD3Controller.Views.Modulation;
+
+public partial class StaticView
 {
-    public partial class StaticView
+    public StaticView()
     {
-        public StaticView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

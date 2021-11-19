@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views.Gain
+﻿namespace AUTD3Controller.Views.Gain;
+
+public partial class HoloView
 {
-    public partial class HoloView
+    public HoloView()
     {
-        public HoloView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

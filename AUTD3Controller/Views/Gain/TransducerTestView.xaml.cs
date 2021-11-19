@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views.Gain
+﻿namespace AUTD3Controller.Views.Gain;
+
+public partial class TransducerTestView
 {
-    public partial class TransducerTestView
+    public TransducerTestView()
     {
-        public TransducerTestView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

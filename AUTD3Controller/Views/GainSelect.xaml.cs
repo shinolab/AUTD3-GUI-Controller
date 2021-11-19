@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views
+﻿namespace AUTD3Controller.Views;
+
+public partial class GainSelect
 {
-    public partial class GainSelect
+    public GainSelect()
     {
-        public GainSelect()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

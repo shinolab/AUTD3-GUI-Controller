@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views.Gain
+﻿namespace AUTD3Controller.Views.Gain;
+
+public partial class PlaneWaveView
 {
-    public partial class PlaneWaveView
+    public PlaneWaveView()
     {
-        public PlaneWaveView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views
+﻿namespace AUTD3Controller.Views;
+
+public partial class Link
 {
-    public partial class Link
+    public Link()
     {
-        public Link()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

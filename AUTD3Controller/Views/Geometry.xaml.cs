@@ -1,10 +1,9 @@
-﻿namespace AUTD3Controller.Views
+﻿namespace AUTD3Controller.Views;
+
+public partial class Geometry
 {
-    public partial class Geometry
+    public Geometry()
     {
-        public Geometry()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }
